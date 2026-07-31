@@ -27,6 +27,9 @@
     <link rel="stylesheet"
           href="assets/css/tema.css">
 
+    <link rel="stylesheet"
+          href="assets/css/perfil.css">
+
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
 
@@ -141,13 +144,22 @@
 
         <div class="menu-direita">
 
-            <span>
+            <button
+                class="btnPerfil"
+                onclick="abrirPerfil()"
+                title="Ver perfil">
 
-                Bem-vindo,
+                <i class="fa-solid fa-user-circle"></i>
 
-                <strong id="nomeUsuario"></strong>
+                <span>
 
-            </span>
+                    Bem-vindo,
+
+                    <strong id="nomeUsuario"></strong>
+
+                </span>
+
+            </button>
 
             <button
 
@@ -165,7 +177,59 @@
 
     </div>
 
-</header>   
+</header>
+
+<div id="modalPerfil" class="modal-overlay" hidden>
+
+    <div class="modal-caixa">
+
+        <button class="modal-fechar" onclick="fecharPerfil()" aria-label="Fechar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h2><i class="fa-solid fa-user-circle"></i> Meu Perfil</h2>
+
+        <div class="perfil-info">
+
+            <p><strong>Nome:</strong> <span id="perfilNome"></span></p>
+            <p><strong>Cargo:</strong> <span id="perfilCargo"></span></p>
+
+        </div>
+
+        <hr class="perfil-divisor">
+
+        <h3>Trocar senha</h3>
+
+        <form id="formSenha">
+
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="senhaAtual" placeholder="Senha atual" autocomplete="current-password" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-key"></i>
+                <input type="password" id="senhaNova" placeholder="Nova senha" autocomplete="new-password" required minlength="6">
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-key"></i>
+                <input type="password" id="senhaNovaConfirma" placeholder="Confirmar nova senha" autocomplete="new-password" required minlength="6">
+            </div>
+
+            <button type="submit" class="btn-login">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Salvar nova senha
+            </button>
+
+        </form>
+
+        <div id="mensagemSenha"></div>
+
+    </div>
+
+</div>
+
 
 
 <main>
@@ -374,6 +438,8 @@ pelo dashboard.js
 <div id="footer"></div>
 
 <script src="assets/js/logout.js"></script>
+
+<script src="assets/js/perfil.js"></script>
 
 <script src="assets/js/dashboard.js"></script>
 
