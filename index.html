@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Central BI | Pedreira Sargon</title>
+
+    <link rel="stylesheet" href="assets/css/footer.css">
+
+    <link rel="icon"
+          href="img/icons/sargon-icon.ico">
+
+    <link rel="stylesheet"
+          href="assets/css/global.css">
+
+    <link rel="stylesheet"
+          href="assets/css/header.css">
+
+    <link rel="stylesheet"
+          href="assets/css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="assets/css/tema.css">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <script src="assets/js/guard.js"></script>
+
+    <script src="assets/js/tema.js"></script>
+
+</head>
+
+<body>
+
+    <header class="topo">
+
+    <div class="header-container">
+
+        <div class="logo-esquerda">
+
+            <img
+                src="img/logos/logo-solo.png"
+                alt="Sargon"
+                class="logo-sargon">
+
+        </div>
+
+        <div class="titulo-central">
+
+            <h1>Central BI</h1>
+
+            <span>
+
+                Plataforma Corporativa de Business Intelligence
+
+            </span>
+
+        </div>
+
+        <div class="logo-direita">
+
+            <img
+                src="img/logos/logo-powerbi.png"
+                alt="Power BI"
+                class="logo-powerbi">
+
+            <div class="seletor-tema">
+
+                <button
+                    id="botaoTema"
+                    class="botao-tema"
+                    onclick="alternarMenuTema()"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-label="Selecionar tema"
+                    title="Selecionar tema">
+
+                    <span id="iconeTema">⚪</span>
+
+                </button>
+
+                <div id="menuTema" class="menu-tema" role="menu" hidden>
+
+                    <button class="opcao-tema" data-tema="claro" onclick="selecionarTema('claro')" role="menuitem">
+                        <span>⚪</span> Claro
+                    </button>
+
+                    <button class="opcao-tema" data-tema="escuro" onclick="selecionarTema('escuro')" role="menuitem">
+                        <span>🌙</span> Escuro
+                    </button>
+
+                    <button class="opcao-tema" data-tema="azul" onclick="selecionarTema('azul')" role="menuitem">
+                        <span>🔵</span> Azul Corporativo
+                    </button>
+
+                    <button class="opcao-tema" data-tema="verde" onclick="selecionarTema('verde')" role="menuitem">
+                        <span>🟢</span> Verde Ambiental
+                    </button>
+
+                    <button class="opcao-tema" data-tema="amarelo" onclick="selecionarTema('amarelo')" role="menuitem">
+                        <span>🟡</span> Amarelo Power BI
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="linha-degrade"></div>
+
+    <div class="menu-superior">
+
+        <div class="menu-esquerda">
+
+            <a href="http://www.pedreirasargon.com.br/Sargon/">
+
+                Conheça nossos produtos
+
+            </a>
+
+        </div>
+
+        <div class="menu-direita">
+
+            <span>
+
+                Bem-vindo,
+
+                <strong id="nomeUsuario"></strong>
+
+            </span>
+
+            <button
+
+                class="btnLogout"
+
+                onclick="logout()">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Sair
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>   
+
+
+<main>
+
+<section class="hero">
+
+    <div class="hero-container">
+
+        <div>
+
+            <h1>
+
+                Central de Business Intelligence
+
+            </h1>
+
+            <p>
+
+                Plataforma corporativa para acesso rápido aos
+                dashboards da Pedreira Sargon.
+
+            </p>
+
+        </div>
+
+        <div class="hero-icons">
+
+            <i class="fa-solid fa-chart-column"></i>
+
+            <i class="fa-solid fa-database"></i>
+
+            <i class="fa-solid fa-industry"></i>
+
+        </div>
+
+    </div>
+
+</section> 
+
+<section class="pesquisa">
+
+<div class="pesquisa-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+
+type="text"
+
+id="buscarDashboard"
+
+placeholder="Pesquisar dashboard...">
+
+</div>
+
+</section>
+
+<section class="estatisticas">
+
+<div class="card-info">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<div>
+
+<h2 id="totalDashboards">
+
+0
+
+</h2>
+
+<span>
+
+Dashboards
+
+</span>
+
+</div>
+
+</div>
+
+<div class="card-info">
+
+<i class="fa-solid fa-users"></i>
+
+<div>
+
+<h2 id="nomeUsuarioCard">
+
+-
+
+</h2>
+
+<span>
+
+Usuário
+
+</span>
+
+</div>
+
+</div>
+
+<div class="card-info">
+
+<i class="fa-solid fa-clock"></i>
+
+<div>
+
+<h2 id="horaAtual">
+
+00:00
+
+</h2>
+
+<span>
+
+Horário
+
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="categorias">
+
+<button class="categoria ativa">
+
+Todos
+
+</button>
+
+<button class="categoria">
+
+Produção
+
+</button>
+
+<!-- <button class="categoria">
+
+Financeiro
+
+</button> -->
+
+<button class="categoria">
+
+Comercial
+
+</button>
+
+<button class="categoria">
+
+Manutenção
+
+</button>
+
+<button class="categoria">
+
+RH
+
+</button>
+
+</section>
+
+<section>
+
+<div
+
+id="painelBI"
+
+class="painelBI">
+
+<!--
+Os cards serão carregados automaticamente
+pelo dashboard.js
+-->
+
+</div>
+
+</section>
+
+<section>
+
+<!-- <h2 class="titulo-secao">Acessos Rápidos</h2> -->
+
+<div
+
+id="painelLinks"
+
+class="painelBI">
+
+<!--
+Os links serão carregados automaticamente
+pelo dashboard.js
+-->
+
+</div>
+
+</section>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="assets/js/logout.js"></script>
+
+<script src="assets/js/dashboard.js"></script>
+
+<script>
+
+// ==============================
+// Relógio
+// ==============================
+
+function atualizarHora(){
+
+    const agora = new Date();
+
+    const hora = agora.toLocaleTimeString("pt-BR",{
+
+        hour:"2-digit",
+
+        minute:"2-digit"
+
+    });
+
+    document.getElementById("horaAtual").textContent = hora;
+
+}
+
+atualizarHora();
+
+setInterval(atualizarHora,1000);
+
+// ==============================
+// Pesquisa
+// ==============================
+
+const campoPesquisa =
+
+document.getElementById("buscarDashboard");
+
+campoPesquisa.addEventListener("keyup",function(){
+
+    const pesquisa =
+    this.value.toLowerCase();
+
+    const cards =
+
+    document.querySelectorAll(".card-bi");
+
+    cards.forEach(card=>{
+
+        const texto =
+
+        card.innerText.toLowerCase();
+
+        if(texto.includes(pesquisa)){
+
+            card.style.display="flex";
+
+        }else{
+
+            card.style.display="none";
+
+        }
+
+    });
+
+});
+
+// ==============================
+// Categorias
+// ==============================
+
+const categorias =
+
+document.querySelectorAll(".categoria");
+
+categorias.forEach(botao=>{
+
+    botao.addEventListener("click",()=>{
+
+        categorias.forEach(c=>{
+
+            c.classList.remove("ativa");
+
+        });
+
+        botao.classList.add("ativa");
+
+        const categoriaSelecionada =
+        botao.innerText.toLowerCase();
+
+        const cards =
+
+        document.querySelectorAll(".card-bi");
+
+        cards.forEach(card=>{
+
+            if(categoriaSelecionada=="todos"){
+
+                card.style.display="flex";
+
+                return;
+
+            }
+
+            const categoria =
+
+            card.dataset.categoria.toLowerCase();
+
+            if(categoria==categoriaSelecionada){
+
+                card.style.display="flex";
+
+            }else{
+
+                card.style.display="none";
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
+<footer>
+
+    <div class="footer-container">
+
+        <p>
+
+            © 2026 Pedreira Sargon
+
+        </p>
+
+        <p>
+
+            Central BI • Plataforma Corporativa de Business Intelligence
+
+        </p>
+
+        <p>
+
+            Desenvolvido para uso interno.
+
+        </p>
+
+        <span>📞 +55 (11) 97826-9476</span>
+                <a href="mailto:renan.santos@sargon.com.br?subject=Suporte%20Power%20BI&body=Olá,%20gostaria%20de%20solicitar%20suporte."
+                    class="email-link">
+                    ✉ renan.santos@sargon.com.br
+                </a>
+            </div>
+            
+    </div>
+
+</footer>
+
+</body>
+
+</html>

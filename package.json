@@ -1,0 +1,11 @@
+{
+  "name": "central-bi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Central BI - Pedreira Sargon (site estatico + Netlify Functions com Supabase)",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

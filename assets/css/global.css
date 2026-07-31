@@ -1,0 +1,153 @@
+/* =======================================================
+   CENTRAL BI - PEDREIRA SARGON
+   Arquivo Global
+======================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:#eef3f9;
+
+    color:#1e293b;
+
+    overflow-x:hidden;
+
+}
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+button{
+
+    font-family:'Inter',sans-serif;
+
+    cursor:pointer;
+
+}
+
+input{
+
+    font-family:'Inter',sans-serif;
+
+    outline:none;
+
+}
+
+.container{
+
+    width:100%;
+
+    max-width:1400px;
+
+    margin:auto;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+/* Scroll */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#e5e7eb;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#0b63ce;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#084fa8;
+
+}
+
+/* Animações */
+
+.fade{
+
+    animation:fade .4s ease;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.shadow{
+
+    box-shadow:0 10px 35px rgba(0,0,0,.12);
+
+}
+
+.radius{
+
+    border-radius:16px;
+
+}
+
+.blue-gradient{
+
+    background:linear-gradient(
+        90deg,
+        #4ca5ff,
+        #0062d6,
+        #003f8f
+    );
+
+}

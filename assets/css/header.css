@@ -1,0 +1,254 @@
+/* ==========================================================
+   HEADER - CENTRAL BI
+   PEDREIRA SARGON
+========================================================== */
+
+.topo{
+
+    width:100%;
+
+    background:#ffffff;
+
+    box-shadow:0 4px 18px rgba(0,0,0,.08);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+
+}
+
+.header-container{
+
+    max-width:1450px;
+
+    margin:auto;
+
+    height:95px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 35px;
+
+}
+
+.logo-sargon{
+
+    height:58px;
+
+}
+
+.logo-powerbi{
+
+    height:42px;
+
+}
+
+.titulo-central{
+
+    text-align:center;
+
+}
+
+.titulo-central h1{
+
+    color:#0057b8;
+
+    font-size:32px;
+
+    font-weight:700;
+
+    margin-bottom:6px;
+
+}
+
+.titulo-central span{
+
+    color:#6b7280;
+
+    font-size:15px;
+
+}
+
+.linha-degrade{
+
+    width:100%;
+
+    height:5px;
+
+    background:linear-gradient(
+        90deg,
+        #6ec3ff,
+        #1d86ff,
+        #0057b8,
+        #003d80
+    );
+
+}
+
+.menu-superior{
+
+    max-width:1450px;
+
+    margin:auto;
+
+    height:62px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 35px;
+
+}
+
+.menu-esquerda{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:28px;
+
+}
+
+.menu-esquerda a{
+
+    color:#0057b8;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.menu-esquerda a:hover{
+
+    color:#0a84ff;
+
+}
+
+.menu-direita{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:22px;
+
+}
+
+.menu-direita span{
+
+    color:#4b5563;
+
+    font-size:15px;
+
+}
+
+.menu-direita strong{
+
+    color:#0057b8;
+
+}
+
+.btnLogout{
+
+    border:none;
+
+    background:#d32f2f;
+
+    color:#fff;
+
+    border-radius:10px;
+
+    padding:11px 20px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    transition:.25s;
+
+}
+
+.btnLogout:hover{
+
+    background:#b71c1c;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 25px rgba(183,28,28,.35);
+
+}
+
+@media(max-width:1100px){
+
+.header-container{
+
+    flex-direction:column;
+
+    height:auto;
+
+    gap:18px;
+
+    padding:25px;
+
+}
+
+.menu-superior{
+
+    flex-direction:column;
+
+    height:auto;
+
+    gap:18px;
+
+    padding:20px;
+
+}
+
+}
+
+@media(max-width:650px){
+
+.menu-direita{
+
+    flex-direction:column;
+
+}
+
+.titulo-central h1{
+
+    font-size:25px;
+
+}
+
+.logo-sargon{
+
+    height:45px;
+
+}
+
+.logo-powerbi{
+
+    height:34px;
+
+}
+
+}

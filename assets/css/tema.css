@@ -1,0 +1,507 @@
+/* ==========================================
+   CENTRAL BI
+   Pedreira Sargon
+   Temas (Claro, Escuro, Azul Corporativo,
+   Verde Ambiental, Amarelo Power BI)
+========================================== */
+
+.logo-direita{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+.seletor-tema{
+
+    position:relative;
+
+}
+
+.botao-tema{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    border:1px solid #d7e2ee;
+
+    background:#f3f7fc;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:16px;
+
+    transition:.25s;
+
+    cursor:pointer;
+
+}
+
+.botao-tema:hover{
+
+    background:#e6eefb;
+
+}
+
+.menu-tema{
+
+    position:absolute;
+
+    top:calc(100% + 10px);
+
+    right:0;
+
+    background:#ffffff;
+
+    border:1px solid #d7e2ee;
+
+    border-radius:12px;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.15);
+
+    padding:8px;
+
+    min-width:210px;
+
+    z-index:50;
+
+}
+
+.menu-tema[hidden]{
+
+    display:none;
+
+}
+
+.opcao-tema{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    width:100%;
+
+    padding:9px 12px;
+
+    border:none;
+
+    background:transparent;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    color:#1e293b;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    transition:.15s;
+
+}
+
+.opcao-tema:hover{
+
+    background:#eef3f9;
+
+}
+
+.opcao-tema.ativo{
+
+    background:#eaf3ff;
+
+    font-weight:500;
+
+}
+
+/* ===== PALETAS (cada tema so define os valores) ===== */
+
+html[data-tema="escuro"]{
+
+    --tema-fundo:#0f172a;
+    --tema-fundo-cabecalho:#111827;
+    --tema-fundo-card:#1e293b;
+    --tema-acento-texto:#4ca5ff;
+    --tema-acento-texto-hover:#7cc0ff;
+    --tema-acento-fundo:#2563eb;
+    --tema-texto:#e2e8f0;
+    --tema-texto-secundario:#94a3b8;
+    --tema-texto-sobre-acento:#ffffff;
+    --tema-borda:#334155;
+    --tema-sombra:rgba(0,0,0,.4);
+    --tema-icone-fundo:#16324f;
+
+}
+
+html[data-tema="azul"]{
+
+    --tema-fundo:#0b2f66;
+    --tema-fundo-cabecalho:#0e3a7a;
+    --tema-fundo-card:#14458f;
+    --tema-acento-texto:#7ec8ff;
+    --tema-acento-texto-hover:#a5d8ff;
+    --tema-acento-fundo:#2f7bd6;
+    --tema-texto:#ffffff;
+    --tema-texto-secundario:#c3d7f2;
+    --tema-texto-sobre-acento:#ffffff;
+    --tema-borda:#2a5aa0;
+    --tema-sombra:rgba(0,0,0,.35);
+    --tema-icone-fundo:#1c5bb0;
+    --tema-hero-gradiente:linear-gradient(135deg,#1450a0,#0b3a80,#062a60);
+
+}
+
+html[data-tema="verde"]{
+
+    --tema-fundo:#0d3b2e;
+    --tema-fundo-cabecalho:#124a3a;
+    --tema-fundo-card:#165a46;
+    --tema-acento-texto:#6fe0a8;
+    --tema-acento-texto-hover:#93ecc0;
+    --tema-acento-fundo:#1f9d6c;
+    --tema-texto:#ffffff;
+    --tema-texto-secundario:#bfe8d4;
+    --tema-texto-sobre-acento:#ffffff;
+    --tema-borda:#2c6b52;
+    --tema-sombra:rgba(0,0,0,.35);
+    --tema-icone-fundo:#1d7355;
+    --tema-hero-gradiente:linear-gradient(135deg,#1c8a63,#136b4c,#0b4a35);
+
+    .card-bi::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:6px;
+    background:linear-gradient(
+        90deg,
+        #1c8a63,#136b4c,#0b4a35
+    );
+
+}
+
+}
+
+html[data-tema="amarelo"]{
+
+    --tema-fundo:#fdf6e8;
+    --tema-fundo-cabecalho:#d9a441;
+    --tema-fundo-card:#ffffff;
+    --tema-acento-texto:#2b2b28;
+    --tema-acento-texto-hover:#8a5a10;
+    --tema-acento-fundo:#d9a441;
+    --tema-texto:#2b2b28;
+    --tema-texto-secundario:#6b5a3a;
+    --tema-texto-sobre-acento:#2b2b28;
+    --tema-borda:#e8ddc2;
+    --tema-sombra:rgba(0,0,0,.15);
+    --tema-icone-fundo:#f5e4bb;
+    --tema-hero-gradiente:linear-gradient(135deg,#e0a800,#c9911f,#a97815);
+
+    .card-bi::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:6px;
+    background:linear-gradient(
+        90deg,
+        #e0a800,#c9911f,#a97815
+    );
+
+}
+
+}
+
+/* ===== REGRAS COMPARTILHADAS (qualquer tema que nao seja o Claro) ===== */
+
+html:not([data-tema="claro"]) body{
+
+    background:var(--tema-fundo);
+
+    color:var(--tema-texto);
+
+}
+
+html:not([data-tema="claro"]) ::-webkit-scrollbar-track{
+
+    background:var(--tema-fundo-card);
+
+}
+
+html:not([data-tema="claro"]) ::-webkit-scrollbar-thumb{
+
+    background:var(--tema-acento-fundo);
+
+}
+
+html:not([data-tema="claro"]) .botao-tema,
+html:not([data-tema="claro"]) .menu-tema{
+
+    background:var(--tema-fundo-card);
+
+    border-color:var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .botao-tema{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .opcao-tema{
+
+    color:var(--tema-texto);
+
+}
+
+html:not([data-tema="claro"]) .opcao-tema:hover{
+
+    background:var(--tema-fundo-cabecalho);
+
+}
+
+html:not([data-tema="claro"]) .opcao-tema.ativo{
+
+    background:var(--tema-acento-fundo);
+
+    color:var(--tema-texto-sobre-acento);
+
+}
+
+html:not([data-tema="claro"]) .topo{
+
+    background:var(--tema-fundo-cabecalho);
+
+    box-shadow:0 4px 18px var(--tema-sombra);
+
+}
+
+html:not([data-tema="claro"]) .titulo-central h1{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .titulo-central span{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) .menu-esquerda a{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .menu-esquerda a:hover{
+
+    color:var(--tema-acento-texto-hover);
+
+}
+
+html:not([data-tema="claro"]) .menu-direita span{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) .menu-direita strong{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .pesquisa-box{
+
+    background:var(--tema-fundo-card);
+
+    border:1px solid var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .pesquisa-box input{
+
+    background:transparent;
+
+    color:var(--tema-texto);
+
+}
+
+html:not([data-tema="claro"]) .pesquisa-box input::placeholder{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) .pesquisa-box i{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .card-info{
+
+    background:var(--tema-fundo-card);
+
+    border:1px solid var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .card-info i{
+
+    background:var(--tema-icone-fundo);
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .card-info h2{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .card-info span{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) .categoria{
+
+    background:var(--tema-fundo-card);
+
+    color:var(--tema-texto);
+
+    border:1px solid var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .categoria:hover,
+html:not([data-tema="claro"]) .categoria.ativa{
+
+    background:var(--tema-acento-fundo);
+
+    color:var(--tema-texto-sobre-acento);
+
+    border-color:var(--tema-acento-fundo);
+
+}
+
+html:not([data-tema="claro"]) .card-bi{
+
+    background:var(--tema-fundo-card);
+
+    color:var(--tema-texto);
+
+    border:1px solid var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .card-bi i{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .card-bi h3{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .card-bi p{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) .card-bi .abrir{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) footer{
+
+    background:var(--tema-fundo-cabecalho);
+
+    border-top:1px solid var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .footer-container p{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) .footer-container p:first-child{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .email-link:hover{
+
+    color:var(--tema-acento-texto-hover);
+
+}
+
+/* hero e linha-degrade so trocam de cor nos temas com identidade propria
+   (Escuro mantem o azul original, ja combina bem com o fundo escuro neutro) */
+
+html[data-tema="azul"] .hero,
+html[data-tema="verde"] .hero,
+html[data-tema="amarelo"] .hero{
+
+    background:var(--tema-hero-gradiente);
+
+}
+
+html[data-tema="azul"] .linha-degrade,
+html[data-tema="verde"] .linha-degrade,
+html[data-tema="amarelo"] .linha-degrade{
+
+    background:var(--tema-hero-gradiente);
+
+}
+
+
+/* ===== Título da seção "Acessos Rápidos" ===== */
+
+.titulo-secao{
+
+    color:#0057b8;
+
+    font-size:20px;
+
+    font-weight:500;
+
+    margin:0 0 16px;
+
+}
+
+html:not([data-tema="claro"]) .titulo-secao{
+
+    color:var(--tema-acento-texto);
+
+}

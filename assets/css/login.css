@@ -1,0 +1,265 @@
+/* =======================================================
+   LOGIN - CENTRAL BI
+   PEDREIRA SARGON
+======================================================= */
+
+body{
+
+    background: #ffff;
+
+    min-height:100vh;
+
+}
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    background-image:url("../img/background-login.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    z-index:-2;
+
+}
+
+.overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        135deg,
+        rgba(0,58,125,.88),
+        rgba(8,36,79,.90)
+    );
+
+}
+
+.login-container{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+    background:linear-gradient(
+        90deg,
+        #031f41,
+        #1177eb,
+        #031f41
+    );
+
+}
+
+.login-card{
+
+    width:430px;
+
+    background:#ffffff;
+
+    border-radius:22px;
+
+    padding:45px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+
+    animation:fade .5s ease;
+
+}
+
+.logo-area{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+}
+
+.logo-sargon{
+
+    height:65px;
+
+}
+
+.logo-powerbi{
+
+    height:45px;
+
+}
+
+.login-card h1{
+
+    text-align:center;
+
+    color:#0057b8;
+
+    font-size:33px;
+
+    margin-bottom:10px;
+
+    font-weight:700;
+
+}
+
+.login-card p{
+
+    text-align:center;
+
+    color:#6b7280;
+
+    margin-bottom:35px;
+
+    line-height:24px;
+
+}
+
+.input-group{
+
+    position:relative;
+
+    margin-bottom:22px;
+
+}
+
+.input-group i{
+
+    position:absolute;
+
+    left:18px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#0057b8;
+
+    font-size:18px;
+
+}
+
+.input-group input{
+
+    width:100%;
+
+    height:55px;
+
+    border:1px solid #d4dbe5;
+
+    border-radius:12px;
+
+    padding-left:52px;
+
+    font-size:15px;
+
+    transition:.25s;
+
+}
+
+.input-group input:focus{
+
+    border-color:#0057b8;
+
+    box-shadow:0 0 0 4px rgba(0,91,255,.12);
+
+}
+
+.btn-login{
+
+    width:100%;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(
+        90deg,
+        #0074ff,
+        #0057b8
+    );
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.btn-login:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 15px 30px rgba(0,91,255,.25);
+
+}
+
+.btn-login i{
+
+    margin-right:8px;
+
+}
+
+#erroLogin{
+
+    text-align:center;
+
+    color:#d62828;
+
+    margin-top:18px;
+
+    font-size:14px;
+
+    min-height:22px;
+
+}
+
+.footer-login{
+
+    margin-top:35px;
+
+    text-align:center;
+
+    color:#9ca3af;
+
+    font-size:13px;
+
+}
+
+@media(max-width:520px){
+
+.login-card{
+
+    width:100%;
+
+    padding:35px;
+
+}
+
+.logo-area{
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+}
