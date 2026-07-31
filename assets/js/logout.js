@@ -14,6 +14,8 @@ async function logout() {
         // segue para o redirecionamento mesmo se a chamada falhar
     }
 
+    centralBiLimparCache();
+
     window.location.replace("login.html");
 
 }

@@ -1,17 +1,18 @@
 /* ===================================================
    CENTRAL BI
    Proteção das Páginas — sessão validada no servidor
+   (usa cache curto de assets/js/sessao.js)
 =================================================== */
 
-window.__sessaoCentralBI = fetch("/.netlify/functions/me", { credentials: "same-origin" })
-    .then((resposta) => {
+window.__sessaoCentralBI = centralBiBuscarSessao()
+    .then((dados) => {
 
-        if (!resposta.ok) {
+        if (!dados) {
             window.location.replace("login.html");
             return null;
         }
 
-        return resposta.json();
+        return dados;
 
     })
     .catch(() => {

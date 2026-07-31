@@ -18,14 +18,12 @@ async function abrirPerfil(){
 
     try {
 
-        const resposta = await fetch("/.netlify/functions/me", { credentials: "same-origin" });
+        const sessao = await centralBiBuscarSessao();
 
-        if (!resposta.ok){
+        if (!sessao){
             window.location.replace("login.html");
             return;
         }
-
-        const sessao = await resposta.json();
 
         document.getElementById("perfilNome").textContent = sessao.nome;
         document.getElementById("perfilCargo").textContent = sessao.cargo;
