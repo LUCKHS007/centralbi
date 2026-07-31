@@ -64,8 +64,8 @@ insert into dashboards (id, titulo, categoria, descricao, icone, link, permissao
 -- Seed: links externos (de links.js)
 -- ============================================================
 insert into links_externos (id, titulo, descricao, icone, url, permissao) values
-('gtfrota', 'GtFrota', 'Relatório de abastecimento (GTFROTA)', 'fa-gas-pump', '', null),
-('fluig', 'Fluig', 'Abrir chamado com a TI ou lançar atestado (Fluig)', 'fa-headset', '', null),
+('gtfrota', 'GtFrota', 'Relatório de abastecimento (GTFROTA)', 'fa-gas-pump', 'http://10.15.200.220/GTFROTA/Security/Login', null),
+('fluig', 'Fluig', 'Abrir chamado com a TI ou lançar atestado (Fluig)', 'fa-headset', 'http://fluig.admceos.com.br:46969/portal/p/CEOS/home', null),
 ('miro', 'Miro', 'Quadro colaborativo', 'fa-diagram-project', 'https://miro.com/welcomeonboard/ZG8yUFk2Q2c2TWFUWUt2WWpHTHpKNWVNOUZsQlh0UHZSVXhZZFcrQnZDVGdmakhvem1SMG1ES3VRb3oyTHVxdklpeFRUemlwc0hzMSs1cTNNK3Z4MVBZVDFFWWtOVk1KZ21HNTJQWUFkMkFNK3k1a0dMRURiVTRIcUdRVEJyd3lhWWluRVAxeXRuUUgwWDl3Mk1qRGVRPT0hdjE=?share_link_id=781713221351', null);
 
 -- ============================================================
