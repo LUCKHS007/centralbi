@@ -52,7 +52,7 @@
 
     background:rgba(8,36,79,.55);
 
-    display:flex;
+    display:none;
 
     justify-content:center;
 
@@ -61,6 +61,12 @@
     z-index:1200;
 
     padding:20px;
+
+}
+
+.modal-overlay:not([hidden]){
+
+    display:flex;
 
 }
 

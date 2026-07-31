@@ -8,16 +8,34 @@ const mensagemSenha = document.getElementById("mensagemSenha");
 
 async function abrirPerfil(){
 
-    const sessao = await window.__sessaoCentralBI;
-    if (!sessao) return;
-
-    document.getElementById("perfilNome").textContent = sessao.nome;
-    document.getElementById("perfilCargo").textContent = sessao.cargo;
-
     mensagemSenha.textContent = "";
     formSenha.reset();
 
+    document.getElementById("perfilNome").textContent = "Carregando...";
+    document.getElementById("perfilCargo").textContent = "Carregando...";
+
     modalPerfil.hidden = false;
+
+    try {
+
+        const resposta = await fetch("/.netlify/functions/me", { credentials: "same-origin" });
+
+        if (!resposta.ok){
+            window.location.replace("login.html");
+            return;
+        }
+
+        const sessao = await resposta.json();
+
+        document.getElementById("perfilNome").textContent = sessao.nome;
+        document.getElementById("perfilCargo").textContent = sessao.cargo;
+
+    } catch {
+
+        document.getElementById("perfilNome").textContent = "-";
+        document.getElementById("perfilCargo").textContent = "-";
+
+    }
 
 }
 
