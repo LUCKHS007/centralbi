@@ -36,6 +36,18 @@
 
     color:#0057b8;
 
+    display:inline-block;
+
+    transition:color .25s ease, transform .25s ease;
+
+}
+
+.btnPerfil:hover i{
+
+    color:#0a84ff;
+
+    transform:scale(1.15);
+
 }
 
 .btnPerfil strong{
