@@ -96,30 +96,30 @@
                     aria-label="Selecionar tema"
                     title="Selecionar tema">
 
-                    <span id="iconeTema">⚪</span>
+                    <span id="iconeTema"><i class="fa-solid fa-sun"></i></span>
 
                 </button>
 
                 <div id="menuTema" class="menu-tema" role="menu" hidden>
 
                     <button class="opcao-tema" data-tema="claro" onclick="selecionarTema('claro')" role="menuitem">
-                        <span>⚪</span> Claro
+                        <span><i class="fa-solid fa-sun"></i></span> Claro
                     </button>
 
                     <button class="opcao-tema" data-tema="escuro" onclick="selecionarTema('escuro')" role="menuitem">
-                        <span>🌙</span> Escuro
+                        <span><i class="fa-solid fa-moon"></i></span> Escuro
                     </button>
 
                     <button class="opcao-tema" data-tema="azul" onclick="selecionarTema('azul')" role="menuitem">
-                        <span>🔵</span> Azul Corporativo
+                        <span><i class="fa-solid fa-water"></i></span> Azul Corporativo
                     </button>
 
                     <button class="opcao-tema" data-tema="verde" onclick="selecionarTema('verde')" role="menuitem">
-                        <span>🟢</span> Verde Ambiental
+                        <span><i class="fa-solid fa-leaf"></i></span> Verde Ambiental
                     </button>
 
                     <button class="opcao-tema" data-tema="amarelo" onclick="selecionarTema('amarelo')" role="menuitem">
-                        <span>🟡</span> Amarelo Power BI
+                        <span><i class="fa-solid fa-bolt"></i></span> Amarelo Power BI
                     </button>
 
                 </div>
@@ -151,7 +151,7 @@
                 onclick="abrirPerfil()"
                 title="Ver perfil">
 
-                <i class="fa-solid fa-user-circle"></i>
+                <span id="avatarUsuario" class="avatar-iniciais" aria-hidden="true"></span>
 
                 <span>
 
@@ -228,6 +228,77 @@
 
         <div id="mensagemSenha"></div>
 
+        <hr class="perfil-divisor" id="divisorAdmin" hidden>
+
+        <button id="botaoGerenciarUsuarios" class="btn-gerenciar-usuarios" onclick="abrirUsuarios()" hidden>
+            <i class="fa-solid fa-user-plus"></i>
+            Gerenciar usuários
+            <span class="tag-admin">admin</span>
+        </button>
+
+    </div>
+
+</div>
+
+<div id="modalUsuarios" class="modal-overlay" hidden>
+
+    <div class="modal-caixa modal-usuarios">
+
+        <button class="modal-fechar" onclick="fecharUsuarios()" aria-label="Fechar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h2><i class="fa-solid fa-users"></i> Gerenciar usuários</h2>
+
+        <div id="listaUsuarios" class="lista-usuarios"></div>
+
+        <hr class="perfil-divisor">
+
+        <h3>Novo usuário</h3>
+
+        <form id="formNovoUsuario">
+
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="novoUsuarioNome" placeholder="Nome completo" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-at"></i>
+                <input type="text" id="novoUsuarioLogin" placeholder="Usuário de login" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-id-badge"></i>
+                <select id="novoUsuarioCargo" required>
+                    <option value="" disabled selected>Selecione o cargo</option>
+                    <option value="Diretor">Diretor</option>
+                    <option value="Gerente">Gerente</option>
+                    <option value="Encarregado_Geral">Encarregado geral</option>
+                    <option value="Encarregado_Setor">Encarregado de setor</option>
+                    <option value="Controle">Controle</option>
+                    <option value="Recepcao">Recepção</option>
+                    <option value="Mecânico">Mecânico</option>
+                    <option value="Operador">Operador</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-key"></i>
+                <input type="password" id="novoUsuarioSenha" placeholder="Senha (deixe em branco para gerar automática)" autocomplete="new-password" minlength="6">
+            </div>
+
+            <button type="submit" class="btn-login">
+                <i class="fa-solid fa-check"></i>
+                Criar usuário
+            </button>
+
+        </form>
+
+        <div id="mensagemNovoUsuario"></div>
+
+        <div id="senhaGeradaAviso" class="senha-gerada-aviso" hidden></div>
+
     </div>
 
 </div>
@@ -285,17 +356,24 @@ id="buscarDashboard"
 
 placeholder="Pesquisar dashboard...">
 
+<span class="atalho-busca">Ctrl K</span>
+
 </div>
 
 </section>
 
-<section class="estatisticas">
+<section class="estatisticas carregando" id="secaoEstatisticas">
 
 <div class="card-info">
 
 <i class="fa-solid fa-chart-line"></i>
 
-<div>
+<div class="skel-stat">
+    <div class="skel-bar-stat w40"></div>
+    <div class="skel-bar-stat w60"></div>
+</div>
+
+<div class="dado-stat">
 
 <h2 id="totalDashboards">
 
@@ -317,7 +395,12 @@ Dashboards
 
 <i class="fa-solid fa-id-badge"></i>
 
-<div>
+<div class="skel-stat">
+    <div class="skel-bar-stat w40"></div>
+    <div class="skel-bar-stat w60"></div>
+</div>
+
+<div class="dado-stat">
 
 <h2 id="cargoUsuarioCard">
 
@@ -335,27 +418,42 @@ Cargo
 
 </div>
 
-<div class="card-info">
+<button class="card-info card-info-clicavel" onclick="irParaAcessoRapido()">
 
-<i class="fa-solid fa-clock"></i>
+<i class="fa-solid fa-bolt"></i>
 
-<div>
+<div class="skel-stat">
+    <div class="skel-bar-stat w40"></div>
+    <div class="skel-bar-stat w60"></div>
+</div>
 
-<h2 id="horaAtual">
+<div class="dado-stat">
 
-00:00
+<h2 id="totalAcessoRapido">
+
+0
 
 </h2>
 
 <span>
 
-Horário
+Acesso Rápido
 
 </span>
 
 </div>
 
-</div>
+</button>
+
+</section>
+
+<section id="secaoRecentes" class="recentes" hidden>
+
+<h2 class="titulo-secao titulo-recentes">
+    <i class="fa-solid fa-clock-rotate-left"></i> Acessado recentemente
+</h2>
+
+<div id="recentesStrip" class="recentes-strip"></div>
 
 </section>
 
@@ -395,22 +493,36 @@ RH
 
 <section>
 
+<div class="controle-visualizacao">
+
+    <div class="lista-toggle" role="group" aria-label="Modo de exibição">
+        <button id="botaoVisualizacaoGrade" class="ativo" onclick="definirVisualizacao('grade')" title="Ver em grade">
+            <i class="fa-solid fa-grip"></i> Grade
+        </button>
+        <button id="botaoVisualizacaoLista" onclick="definirVisualizacao('lista')" title="Ver em lista">
+            <i class="fa-solid fa-list"></i> Lista
+        </button>
+    </div>
+
+</div>
+
 <div
 
 id="painelBI"
 
 class="painelBI">
 
-<div class="carregando">
-    <i class="fa-solid fa-spinner fa-spin"></i>
-    Carregando dashboards...
-</div>
+<div class="skeleton-card"><div class="skeleton-bar w60"></div><div class="skeleton-bar w40"></div></div>
+<div class="skeleton-card"><div class="skeleton-bar w60"></div><div class="skeleton-bar w40"></div></div>
+<div class="skeleton-card"><div class="skeleton-bar w60"></div><div class="skeleton-bar w40"></div></div>
 
 </div>
 
 <div id="semResultadoBusca" class="estado-vazio" hidden>
 
-    Nenhum dashboard encontrado para essa pesquisa.
+    <i class="fa-solid fa-folder-open"></i>
+
+    <span>Nenhum dashboard encontrado para essa pesquisa. Tente outro termo ou limpe o filtro.</span>
 
 </div>
 
@@ -418,7 +530,7 @@ class="painelBI">
 
 <section>
 
-<!-- <h2 class="titulo-secao">Acessos Rápidos</h2> -->
+<h2 id="tituloAcessoRapido" class="titulo-secao titulo-acesso-rapido" hidden><span class="pill-acesso-rapido">Acesso Rápido</span></h2>
 
 <div
 
@@ -443,33 +555,51 @@ pelo dashboard.js
 
 <script src="assets/js/perfil.js"></script>
 
+<script src="assets/js/admin-usuarios.js"></script>
+
 <script src="assets/js/dashboard.js"></script>
 
 <script>
 
 // ==============================
-// Relógio
+// Visualização (grade / lista)
 // ==============================
 
-function atualizarHora(){
+const CHAVE_VISUALIZACAO = "centralBiVisualizacaoDashboards";
 
-    const agora = new Date();
+function definirVisualizacao(modo){
 
-    const hora = agora.toLocaleTimeString("pt-BR",{
+    const painelBI = document.getElementById("painelBI");
+    const painelLinks = document.getElementById("painelLinks");
+    const botaoGrade = document.getElementById("botaoVisualizacaoGrade");
+    const botaoLista = document.getElementById("botaoVisualizacaoLista");
 
-        hour:"2-digit",
+    if (!painelBI || !botaoGrade || !botaoLista) return;
 
-        minute:"2-digit"
+    painelBI.classList.toggle("visualizacao-lista", modo === "lista");
+    if (painelLinks) painelLinks.classList.toggle("visualizacao-lista", modo === "lista");
+    botaoGrade.classList.toggle("ativo", modo === "grade");
+    botaoLista.classList.toggle("ativo", modo === "lista");
 
-    });
-
-    document.getElementById("horaAtual").textContent = hora;
+    localStorage.setItem(CHAVE_VISUALIZACAO, modo);
 
 }
 
-atualizarHora();
+definirVisualizacao(localStorage.getItem(CHAVE_VISUALIZACAO) || "grade");
 
-setInterval(atualizarHora,1000);
+// ==============================
+// Acesso Rápido
+// ==============================
+
+function irParaAcessoRapido(){
+
+    const alvo =
+        document.getElementById("tituloAcessoRapido") ||
+        document.getElementById("painelLinks");
+
+    if (alvo) alvo.scrollIntoView({ behavior: "smooth", block: "start" });
+
+}
 
 // ==============================
 // Pesquisa
@@ -480,6 +610,19 @@ const campoPesquisa =
 document.getElementById("buscarDashboard");
 
 const semResultadoBusca = document.getElementById("semResultadoBusca");
+
+document.addEventListener("keydown", function(evento){
+
+    const teclaK = evento.key === "k" || evento.key === "K";
+
+    if((evento.ctrlKey || evento.metaKey) && teclaK){
+
+        evento.preventDefault();
+        campoPesquisa.focus();
+
+    }
+
+});
 
 campoPesquisa.addEventListener("keyup",function(){
 
@@ -546,10 +689,10 @@ campoPesquisa.addEventListener("keyup",function(){
 
         </p>
 
-        <span>📞 +55 (11) 97826-9476</span>
+        <span><i class="fa-solid fa-phone"></i> +55 (11) 97826-9476</span>
                 <a href="mailto:renan.santos@sargon.com.br?subject=Suporte%20Power%20BI&body=Olá,%20gostaria%20de%20solicitar%20suporte."
                     class="email-link">
-                    ✉ renan.santos@sargon.com.br
+                    <i class="fa-solid fa-envelope"></i> renan.santos@sargon.com.br
                 </a>
             </div>
             

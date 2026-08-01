@@ -50,6 +50,40 @@
 
 }
 
+.avatar-iniciais{
+
+    width:28px;
+
+    height:28px;
+
+    border-radius:50%;
+
+    background:#e6f0fb;
+
+    color:#0057b8;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    flex-shrink:0;
+
+    transition:transform .25s ease;
+
+}
+
+.btnPerfil:hover .avatar-iniciais{
+
+    transform:scale(1.1);
+
+}
+
 .btnPerfil strong{
 
     color:#0057b8;
@@ -200,7 +234,8 @@
 
 }
 
-.modal-caixa .input-group input{
+.modal-caixa .input-group input,
+.modal-caixa .input-group select{
 
     width:100%;
 
@@ -216,9 +251,34 @@
 
     transition:.25s;
 
+    background:#fff;
+
+    color:#1e293b;
+
 }
 
-.modal-caixa .input-group input:focus{
+.modal-caixa .input-group select{
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    padding-right:40px;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+
+    background-repeat:no-repeat;
+
+    background-position:right 16px center;
+
+    background-size:16px;
+
+    cursor:pointer;
+
+}
+
+.modal-caixa .input-group input:focus,
+.modal-caixa .input-group select:focus{
 
     border-color:#0057b8;
 
@@ -285,5 +345,266 @@
 #mensagemSenha.sucesso{
 
     color:#0a9e4c;
+
+}
+
+/* GERENCIAR USUÁRIOS (ADMIN) */
+
+.btn-gerenciar-usuarios{
+
+    width:100%;
+
+    height:48px;
+
+    border:1px solid #d4dbe5;
+
+    border-radius:10px;
+
+    background:#fff;
+
+    color:#0057b8;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.btn-gerenciar-usuarios:hover{
+
+    background:#eaf3ff;
+
+}
+
+.btn-gerenciar-usuarios[hidden]{
+
+    display:none;
+
+}
+
+.tag-admin{
+
+    font-size:10px;
+
+    font-weight:600;
+
+    padding:2px 8px;
+
+    border-radius:20px;
+
+    background:#fdf1d6;
+
+    color:#8a5a10;
+
+}
+
+.modal-usuarios{
+
+    width:520px;
+
+}
+
+.lista-usuarios{
+
+    background:#f8fafc;
+
+    border-radius:14px;
+
+    border:1px solid #e5e9f0;
+
+    overflow:hidden;
+
+    max-height:280px;
+
+    overflow-y:auto;
+
+    margin-bottom:8px;
+
+}
+
+.linha-usuario{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 16px;
+
+    border-bottom:1px solid #e5e9f0;
+
+    font-size:13px;
+
+}
+
+.linha-usuario:last-child{
+
+    border-bottom:none;
+
+}
+
+.avatar-mini{
+
+    width:28px;
+
+    height:28px;
+
+    border-radius:50%;
+
+    background:#e6f0fb;
+
+    color:#0057b8;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    flex-shrink:0;
+
+}
+
+.linha-usuario .info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:2px;
+
+    min-width:0;
+
+}
+
+.linha-usuario .info .nome{
+
+    font-weight:500;
+
+    color:#1e293b;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+.linha-usuario .info .login{
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+}
+
+.cargo-mini{
+
+    margin-left:auto;
+
+    color:#0057b8;
+
+    font-size:11px;
+
+    background:#eaf3ff;
+
+    padding:3px 10px;
+
+    border-radius:20px;
+
+    white-space:nowrap;
+
+}
+
+.btn-redefinir{
+
+    border:1px solid #d4dbe5;
+
+    background:transparent;
+
+    border-radius:8px;
+
+    padding:6px 10px;
+
+    font-size:11px;
+
+    color:#6b7280;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    white-space:nowrap;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.btn-redefinir:hover{
+
+    background:#eaf3ff;
+
+    color:#0057b8;
+
+}
+
+.carregando-usuarios,
+.erro-lista-usuarios{
+
+    text-align:center;
+
+    padding:20px;
+
+    font-size:13px;
+
+    color:#6b7280;
+
+}
+
+.senha-gerada-aviso{
+
+    margin-top:14px;
+
+    background:#eaf3ff;
+
+    color:#0057b8;
+
+    border-radius:10px;
+
+    padding:12px 16px;
+
+    font-size:13px;
+
+    font-weight:500;
+
+}
+
+.senha-gerada-aviso.erro{
+
+    background:#fdecea;
+
+    color:#d62828;
 
 }

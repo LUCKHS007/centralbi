@@ -164,6 +164,18 @@ main{
 
 }
 
+.card-info-clicavel{
+
+    border:none;
+
+    width:100%;
+
+    text-align:left;
+
+    font-family:inherit;
+
+}
+
 .card-info:hover{
 
     transform:translateY(-5px);
@@ -630,5 +642,405 @@ footer{
 .hero{
 
     animation:fade .6s ease;
+
+}
+
+/* ATALHO DE BUSCA */
+
+.atalho-busca{
+
+    margin-left:auto;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    color:#6b7280;
+
+    border:1px solid #d4dbe5;
+
+    border-radius:6px;
+
+    padding:2px 8px;
+
+}
+
+/* CONTAGEM NAS CATEGORIAS */
+
+.categoria .contagem{
+
+    opacity:.7;
+
+    font-weight:400;
+
+    margin-left:4px;
+
+}
+
+/* ESTADO VAZIO ILUSTRADO */
+
+.estado-vazio{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.estado-vazio[hidden]{
+
+    display:none;
+
+}
+
+.estado-vazio i{
+
+    font-size:32px;
+
+    color:#c3cddb;
+
+}
+
+/* SKELETON DE CARREGAMENTO */
+
+.skeleton-card{
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    border:1px solid transparent;
+
+    height:150px;
+
+}
+
+.skeleton-bar{
+
+    background:#e5eaf1;
+
+    border-radius:6px;
+
+    height:14px;
+
+    margin-bottom:14px;
+
+    animation:pulsarSkeleton 1.2s ease-in-out infinite;
+
+}
+
+.skeleton-bar.w60{
+
+    width:60%;
+
+}
+
+.skeleton-bar.w40{
+
+    width:40%;
+
+}
+
+@keyframes pulsarSkeleton{
+
+    0%, 100%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:.4;
+
+    }
+
+}
+
+/* BADGE DE CATEGORIA NOS CARDS */
+
+.badge-categoria{
+
+    position:absolute;
+
+    top:16px;
+
+    right:16px;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    padding:3px 10px;
+
+    border-radius:20px;
+
+    background:#eaf3ff;
+
+    color:#0057b8;
+
+}
+
+/* ACESSADO RECENTEMENTE */
+
+.recentes{
+
+    max-width:1400px;
+
+    margin:0 auto 24px;
+
+    padding:0 35px;
+
+}
+
+.titulo-recentes{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:14px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.03em;
+
+    color:#6b7280;
+
+}
+
+.recentes-strip{
+
+    display:flex;
+
+    gap:14px;
+
+    flex-wrap:wrap;
+
+    margin-top:10px;
+
+}
+
+.recente-mini{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:#ffffff;
+
+    border-radius:12px;
+
+    padding:10px 16px;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+
+    color:#1e293b;
+
+    font-size:13px;
+
+    font-weight:500;
+
+    transition:.25s;
+
+}
+
+.recente-mini:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+}
+
+.recente-mini i{
+
+    color:#0057b8;
+
+    font-size:15px;
+
+}
+
+/* SKELETON DOS CARDS DE ESTATÍSTICA */
+
+.skel-stat{
+
+    display:none;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    width:100%;
+
+}
+
+.skel-bar-stat{
+
+    background:#e5eaf1;
+
+    border-radius:6px;
+
+    height:12px;
+
+    animation:pulsarSkeleton 1.2s ease-in-out infinite;
+
+}
+
+.skel-bar-stat.w40{
+
+    width:40%;
+
+}
+
+.skel-bar-stat.w60{
+
+    width:60%;
+
+}
+
+.estatisticas.carregando .card-info .skel-stat{
+
+    display:flex;
+
+}
+
+.estatisticas.carregando .card-info .dado-stat{
+
+    display:none;
+
+}
+
+/* ALTERNAR GRADE / LISTA */
+
+.controle-visualizacao{
+
+    max-width:1400px;
+
+    margin:0 auto 16px;
+
+    padding:0 35px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+}
+
+.lista-toggle{
+
+    display:flex;
+
+    gap:4px;
+
+    background:#ffffff;
+
+    border:1px solid #d7e2ee;
+
+    border-radius:10px;
+
+    padding:4px;
+
+}
+
+.lista-toggle button{
+
+    border:none;
+
+    background:transparent;
+
+    font-size:13px;
+
+    font-weight:500;
+
+    padding:7px 14px;
+
+    border-radius:7px;
+
+    color:#6b7280;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    transition:.2s;
+
+}
+
+.lista-toggle button.ativo{
+
+    background:#eaf3ff;
+
+    color:#0057b8;
+
+}
+
+.painelBI.visualizacao-lista{
+
+    grid-template-columns:1fr;
+
+    gap:10px;
+
+}
+
+.painelBI.visualizacao-lista .card-bi{
+
+    padding:18px 30px;
+
+    min-height:auto;
+
+}
+
+.painelBI.visualizacao-lista .card-bi i{
+
+    font-size:26px;
+
+    margin-bottom:10px;
+
+}
+
+.painelBI.visualizacao-lista .card-bi h3{
+
+    font-size:16px;
+
+    margin-bottom:4px;
+
+}
+
+.painelBI.visualizacao-lista .card-bi p{
+
+    margin-bottom:0;
+
+    line-height:normal;
+
+    font-size:13px;
+
+}
+
+.painelBI.visualizacao-lista .card-bi .abrir{
+
+    display:none;
+
+}
+
+.painelBI.visualizacao-lista .badge-categoria{
+
+    top:14px;
+
+    right:20px;
 
 }

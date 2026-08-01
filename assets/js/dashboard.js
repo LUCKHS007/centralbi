@@ -6,6 +6,18 @@
 const painel = document.getElementById("painelBI");
 const painelLinks = document.getElementById("painelLinks");
 
+function obterIniciais(nome){
+
+    if (!nome) return "";
+
+    const partes = nome.trim().split(/\s+/);
+    const primeira = partes[0]?.[0] || "";
+    const ultima = partes.length > 1 ? partes[partes.length - 1][0] : "";
+
+    return (primeira + ultima).toUpperCase();
+
+}
+
 function criarCardBi(item, { href, categoria, textoAbrir }){
 
     const card = document.createElement("a");
@@ -14,6 +26,17 @@ function criarCardBi(item, { href, categoria, textoAbrir }){
     card.rel = "noopener";
     card.className = "card-bi";
     if (categoria) card.dataset.categoria = categoria;
+
+    if (categoria){
+
+        const badge = document.createElement("span");
+        badge.className = "badge-categoria";
+        badge.textContent = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+        card.appendChild(badge);
+
+    }
+
+    card.addEventListener("click", () => registrarAcessoRecente(item));
 
     const icone = document.createElement("i");
     icone.className = `fa-solid ${item.icone}`;
@@ -41,11 +64,93 @@ function criarCardBi(item, { href, categoria, textoAbrir }){
 
 }
 
+/* ==========================================================
+   Acessados recentemente
+========================================================== */
+
+const CHAVE_RECENTES = "centralBiAcessosRecentes";
+const MAX_RECENTES = 3;
+
+function registrarAcessoRecente(item){
+
+    let recentes = [];
+
+    try {
+        recentes = JSON.parse(localStorage.getItem(CHAVE_RECENTES)) || [];
+    } catch {
+        recentes = [];
+    }
+
+    recentes = recentes.filter(r => r.titulo !== item.titulo);
+    recentes.unshift({ titulo: item.titulo, icone: item.icone });
+    recentes = recentes.slice(0, MAX_RECENTES);
+
+    localStorage.setItem(CHAVE_RECENTES, JSON.stringify(recentes));
+
+}
+
+function renderizarRecentes(listaDashboards){
+
+    const secao = document.getElementById("secaoRecentes");
+    const strip = document.getElementById("recentesStrip");
+
+    if (!secao || !strip) return;
+
+    let recentes = [];
+
+    try {
+        recentes = JSON.parse(localStorage.getItem(CHAVE_RECENTES)) || [];
+    } catch {
+        recentes = [];
+    }
+
+    const titulosDisponiveis = new Set(listaDashboards.map(item => item.titulo));
+    recentes = recentes.filter(r => titulosDisponiveis.has(r.titulo));
+
+    strip.innerHTML = "";
+
+    if (recentes.length === 0){
+        secao.hidden = true;
+        return;
+    }
+
+    secao.hidden = false;
+
+    recentes.forEach(r => {
+
+        const mini = document.createElement("a");
+        mini.className = "recente-mini";
+        mini.href = "#";
+
+        const item = listaDashboards.find(i => i.titulo === r.titulo);
+        if (item) mini.href = item.link;
+        mini.target = "_blank";
+        mini.rel = "noopener";
+
+        const icone = document.createElement("i");
+        icone.className = `fa-solid ${r.icone}`;
+        mini.appendChild(icone);
+
+        mini.append(r.titulo);
+
+        strip.appendChild(mini);
+
+    });
+
+}
+
 function criarEstadoVazio(mensagem){
 
     const aviso = document.createElement("div");
     aviso.className = "estado-vazio";
-    aviso.textContent = mensagem;
+
+    const icone = document.createElement("i");
+    icone.className = "fa-solid fa-folder-open";
+    aviso.appendChild(icone);
+
+    const texto = document.createElement("span");
+    texto.textContent = mensagem;
+    aviso.appendChild(texto);
 
     return aviso;
 
@@ -77,6 +182,9 @@ function renderizarDashboards(lista){
 function renderizarLinks(lista){
 
     painelLinks.innerHTML = "";
+
+    const tituloAcessoRapido = document.getElementById("tituloAcessoRapido");
+    if (tituloAcessoRapido) tituloAcessoRapido.hidden = lista.length === 0;
 
     lista.forEach(item => {
 
@@ -136,6 +244,15 @@ function configurarCategorias(listaDashboards){
         const categoria = botao.dataset.categoria;
         const disponivel = categoria === "todos" || categoriasDisponiveis.has(categoria);
 
+        const total = categoria === "todos"
+            ? listaDashboards.length
+            : listaDashboards.filter(item => item.categoria.toLowerCase() === categoria).length;
+
+        const contagem = document.createElement("span");
+        contagem.className = "contagem";
+        contagem.textContent = `(${total})`;
+        botao.appendChild(contagem);
+
         botao.classList.toggle("indisponivel", !disponivel);
         botao.disabled = !disponivel;
 
@@ -159,6 +276,7 @@ window.__sessaoCentralBI.then((sessao) => {
     renderizarDashboards(sessao.dashboards);
     renderizarLinks(sessao.linksExternos);
     configurarCategorias(sessao.dashboards);
+    renderizarRecentes(sessao.dashboards);
 
     document.getElementById("totalDashboards").textContent =
         sessao.dashboards.length;
@@ -166,7 +284,16 @@ window.__sessaoCentralBI.then((sessao) => {
     const nomeHeader = document.getElementById("nomeUsuario");
     if (nomeHeader) nomeHeader.textContent = sessao.nome;
 
+    const avatarUsuario = document.getElementById("avatarUsuario");
+    if (avatarUsuario) avatarUsuario.textContent = obterIniciais(sessao.nome);
+
     const cargoCard = document.getElementById("cargoUsuarioCard");
     if (cargoCard) cargoCard.textContent = sessao.cargo;
+
+    const totalAcessoRapido = document.getElementById("totalAcessoRapido");
+    if (totalAcessoRapido) totalAcessoRapido.textContent = sessao.linksExternos.length;
+
+    const secaoEstatisticas = document.getElementById("secaoEstatisticas");
+    if (secaoEstatisticas) secaoEstatisticas.classList.remove("carregando");
 
 });

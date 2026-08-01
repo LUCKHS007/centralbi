@@ -21,7 +21,7 @@ exports.handler = async (event) => {
 
     const { data: usuario, error: erroUsuario } = await supabase
         .from("usuarios")
-        .select("nome, cargo, ativo, sessao_versao")
+        .select("nome, usuario, cargo, ativo, sessao_versao")
         .eq("id", sessao.sub)
         .maybeSingle();
 
@@ -49,6 +49,7 @@ exports.handler = async (event) => {
         statusCode: 200,
         body: JSON.stringify({
             nome: usuario.nome,
+            usuario: usuario.usuario,
             cargo: usuario.cargo,
             dashboards: filtrarPermitidos(permissoesDoCargo, dashboardsRes.data),
             linksExternos: filtrarPermitidos(permissoesDoCargo, linksRes.data),

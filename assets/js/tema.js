@@ -15,11 +15,11 @@
 })();
 
 const TEMAS = [
-    { valor: "claro", emoji: "⚪" },
-    { valor: "escuro", emoji: "🌙" },
-    { valor: "azul", emoji: "🔵" },
-    { valor: "verde", emoji: "🟢" },
-    { valor: "amarelo", emoji: "🟡" }
+    { valor: "claro", icone: "fa-sun" },
+    { valor: "escuro", icone: "fa-moon" },
+    { valor: "azul", icone: "fa-water" },
+    { valor: "verde", icone: "fa-leaf" },
+    { valor: "amarelo", icone: "fa-bolt" }
 ];
 
 function selecionarTema(nomeTema){
@@ -85,7 +85,7 @@ function atualizarSeletorTema(){
 
     const icone = document.getElementById("iconeTema");
 
-    if(icone) icone.textContent = info.emoji;
+    if(icone) icone.innerHTML = `<i class="fa-solid ${info.icone}"></i>`;
 
     document.querySelectorAll(".opcao-tema").forEach(botao => {
 
