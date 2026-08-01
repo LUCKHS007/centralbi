@@ -12,7 +12,9 @@ create table usuarios (
     senha_hash text not null,
     nome text not null,
     cargo text not null,
-    ativo boolean not null default true
+    ativo boolean not null default true,
+    tema text not null default 'claro',
+    sessao_versao integer not null default 1
 );
 
 create table dashboards (

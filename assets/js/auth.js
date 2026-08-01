@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const erroLogin = document.getElementById("erroLogin");
         erroLogin.innerHTML = "";
 
+        const botao = form.querySelector(".btn-login");
+        const conteudoOriginal = botao.innerHTML;
+
+        botao.disabled = true;
+        botao.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Entrando...';
+
         try {
 
             const resposta = await fetch("/.netlify/functions/login", {
@@ -29,14 +35,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!resposta.ok) {
                 erroLogin.innerHTML = "Usuário ou senha inválidos.";
+                botao.disabled = false;
+                botao.innerHTML = conteudoOriginal;
                 return;
             }
 
             window.location.href = "index.html";
+            return;
 
         } catch {
 
             erroLogin.innerHTML = "Não foi possível conectar. Tente novamente.";
+            botao.disabled = false;
+            botao.innerHTML = conteudoOriginal;
 
         }
 

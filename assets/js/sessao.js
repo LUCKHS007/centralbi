@@ -62,7 +62,27 @@ async function centralBiBuscarSessao(){
     const cache = centralBiLerCache();
     if (cache) return cache;
 
-    const resposta = await fetch("/.netlify/functions/me", { credentials: "same-origin" });
+    let resposta;
+
+    try {
+
+        resposta = await fetch("/.netlify/functions/me", { credentials: "same-origin" });
+
+    } catch (erroDeRede) {
+
+        const erro = new Error("Falha de conexão ao buscar sessão");
+        erro.tipoErro = "conexao";
+        throw erro;
+
+    }
+
+    if (resposta.status >= 500){
+
+        const erro = new Error("Servidor indisponível");
+        erro.tipoErro = "conexao";
+        throw erro;
+
+    }
 
     if (!resposta.ok){
         centralBiLimparCache();
@@ -73,5 +93,18 @@ async function centralBiBuscarSessao(){
     centralBiSalvarCache(dados);
 
     return dados;
+
+}
+
+function centralBiMostrarErroConexao(){
+
+    document.body.innerHTML = `
+        <div class="erro-conexao">
+            <i class="fa-solid fa-plug-circle-xmark"></i>
+            <h1>Não foi possível conectar</h1>
+            <p>Verifique sua internet e tente novamente. Se o problema continuar, avise o TI.</p>
+            <button onclick="window.location.reload()">Tentar novamente</button>
+        </div>
+    `;
 
 }

@@ -32,6 +32,16 @@ function selecionarTema(nomeTema){
 
     fecharMenuTema();
 
+    fetch("/.netlify/functions/tema", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tema: nomeTema }),
+        credentials: "same-origin",
+    }).catch(() => {
+        // sem internet/servidor fora do ar: tema já está salvo local,
+        // só não sincroniza com a conta até a próxima troca bem-sucedida
+    });
+
 }
 
 function alternarMenuTema(){
@@ -100,5 +110,20 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
     });
+
+    fetch("/.netlify/functions/tema", { credentials: "same-origin" })
+        .then(resposta => resposta.ok ? resposta.json() : null)
+        .then(dados => {
+
+            if(!dados) return;
+
+            document.documentElement.setAttribute("data-tema", dados.tema);
+            localStorage.setItem("tema", dados.tema);
+            atualizarSeletorTema();
+
+        })
+        .catch(() => {
+            // sem conexão: fica com o tema já aplicado do localStorage
+        });
 
 });

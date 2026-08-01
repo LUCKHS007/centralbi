@@ -329,6 +329,99 @@ html:not([data-tema="claro"]) .menu-direita strong{
 
 }
 
+html:not([data-tema="claro"]) .btnPerfil i{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .btnPerfil i:hover{
+
+    color:var(--tema-acento-texto-hover);
+
+}
+
+html:not([data-tema="claro"]) .modal-caixa{
+
+    background:var(--tema-fundo-card);
+
+    color:var(--tema-texto);
+
+}
+
+html:not([data-tema="claro"]) .modal-caixa h2,
+html:not([data-tema="claro"]) .modal-caixa h3{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .modal-fechar{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) .perfil-info p{
+
+    color:var(--tema-texto);
+
+}
+
+html:not([data-tema="claro"]) .perfil-divisor{
+
+    border-top-color:var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .modal-caixa .input-group i{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .modal-caixa .input-group input{
+
+    background:var(--tema-fundo);
+
+    border-color:var(--tema-borda);
+
+    color:var(--tema-texto);
+
+}
+
+html:not([data-tema="claro"]) .modal-caixa .input-group input:focus{
+
+    border-color:var(--tema-acento-fundo);
+
+}
+
+html:not([data-tema="claro"]) .modal-caixa .btn-login{
+
+    background:var(--tema-acento-fundo);
+
+    color:var(--tema-texto-sobre-acento);
+
+}
+
+html:not([data-tema="claro"]) .modal-caixa .btn-login:hover{
+
+    box-shadow:0 15px 30px color-mix(in srgb, var(--tema-acento-fundo) 35%, transparent);
+
+}
+
+html:not([data-tema="claro"]) .toggle-senha{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) .toggle-senha:hover{
+
+    color:var(--tema-acento-texto);
+
+}
+
 html:not([data-tema="claro"]) .pesquisa-box{
 
     background:var(--tema-fundo-card);
@@ -406,6 +499,16 @@ html:not([data-tema="claro"]) .categoria.ativa{
 
 }
 
+html:not([data-tema="claro"]) .categoria.indisponivel:hover{
+
+    background:var(--tema-fundo-card);
+
+    color:var(--tema-texto);
+
+    border-color:var(--tema-borda);
+
+}
+
 html:not([data-tema="claro"]) .card-bi{
 
     background:var(--tema-fundo-card);
@@ -413,6 +516,28 @@ html:not([data-tema="claro"]) .card-bi{
     color:var(--tema-texto);
 
     border:1px solid var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .estado-vazio{
+
+    background:var(--tema-fundo-card);
+
+    color:var(--tema-texto-secundario);
+
+    border-color:var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .carregando{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) .carregando i{
+
+    color:var(--tema-acento-texto);
 
 }
 

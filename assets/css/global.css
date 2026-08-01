@@ -151,3 +151,83 @@ input{
     );
 
 }
+
+.erro-conexao{
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    padding:40px;
+
+    gap:14px;
+
+}
+
+.erro-conexao i{
+
+    font-size:48px;
+
+    color:#d62828;
+
+    margin-bottom:10px;
+
+}
+
+.erro-conexao h1{
+
+    font-size:22px;
+
+    color:#1e293b;
+
+}
+
+.erro-conexao p{
+
+    color:#6b7280;
+
+    max-width:420px;
+
+}
+
+.erro-conexao button{
+
+    margin-top:12px;
+
+    height:48px;
+
+    padding:0 28px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(90deg,#0074ff,#0057b8);
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.erro-conexao button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 15px 30px rgba(0,91,255,.25);
+
+}

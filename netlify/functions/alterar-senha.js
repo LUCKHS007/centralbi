@@ -1,9 +1,10 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { getSupabase } = require("./_supabase");
-const { lerCookie } = require("./_cookie");
+const { lerCookie, montarCookieSessao } = require("./_cookie");
 
 const TAMANHO_MINIMO_SENHA = 6;
+const DEZ_ANOS_EM_SEGUNDOS = 10 * 365 * 24 * 60 * 60;
 
 exports.handler = async (event) => {
     if (event.httpMethod !== "POST") {
@@ -19,7 +20,7 @@ exports.handler = async (event) => {
     try {
         sessao = jwt.verify(token, process.env.JWT_SECRET);
     } catch {
-        return { statusCode: 401, body: JSON.stringify({ erro: "Sessão inválida ou expirada" }) };
+        return { statusCode: 401, body: JSON.stringify({ erro: "Sessão inválida" }) };
     }
 
     let senhaAtual, senhaNova;
@@ -41,7 +42,7 @@ exports.handler = async (event) => {
 
     const { data: usuario, error } = await supabase
         .from("usuarios")
-        .select("id, senha_hash")
+        .select("id, usuario, senha_hash, sessao_versao")
         .eq("id", sessao.sub)
         .maybeSingle();
 
@@ -55,15 +56,27 @@ exports.handler = async (event) => {
     }
 
     const novoHash = await bcrypt.hash(senhaNova, 10);
+    const novaSessaoVersao = usuario.sessao_versao + 1;
 
     const { error: erroUpdate } = await supabase
         .from("usuarios")
-        .update({ senha_hash: novoHash })
+        .update({ senha_hash: novoHash, sessao_versao: novaSessaoVersao })
         .eq("id", usuario.id);
 
     if (erroUpdate) {
         return { statusCode: 500, body: JSON.stringify({ erro: "Não foi possível salvar a nova senha." }) };
     }
 
-    return { statusCode: 200, body: JSON.stringify({ ok: true }) };
+    // Troca de senha invalida sessões antigas (outros aparelhos), mas emite
+    // um cookie novo aqui pra este mesmo aparelho continuar logado.
+    const novoToken = jwt.sign(
+        { sub: usuario.id, usuario: usuario.usuario, sessaoVersao: novaSessaoVersao },
+        process.env.JWT_SECRET
+    );
+
+    return {
+        statusCode: 200,
+        headers: { "Set-Cookie": montarCookieSessao(novoToken, DEZ_ANOS_EM_SEGUNDOS) },
+        body: JSON.stringify({ ok: true }),
+    };
 };

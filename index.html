@@ -315,11 +315,11 @@ Dashboards
 
 <div class="card-info">
 
-<i class="fa-solid fa-users"></i>
+<i class="fa-solid fa-id-badge"></i>
 
 <div>
 
-<h2 id="nomeUsuarioCard">
+<h2 id="cargoUsuarioCard">
 
 -
 
@@ -327,7 +327,7 @@ Dashboards
 
 <span>
 
-Usuário
+Cargo
 
 </span>
 
@@ -359,39 +359,33 @@ Horário
 
 </section>
 
-<section class="categorias">
+<section class="categorias" id="categoriasContainer">
 
-<button class="categoria ativa">
+<button class="categoria ativa" data-categoria="todos">
 
 Todos
 
 </button>
 
-<button class="categoria">
+<button class="categoria" data-categoria="produção">
 
 Produção
 
 </button>
 
-<!-- <button class="categoria">
-
-Financeiro
-
-</button> -->
-
-<button class="categoria">
+<button class="categoria" data-categoria="comercial">
 
 Comercial
 
 </button>
 
-<button class="categoria">
+<button class="categoria" data-categoria="manutenção">
 
 Manutenção
 
 </button>
 
-<button class="categoria">
+<button class="categoria" data-categoria="rh">
 
 RH
 
@@ -407,10 +401,16 @@ id="painelBI"
 
 class="painelBI">
 
-<!--
-Os cards serão carregados automaticamente
-pelo dashboard.js
--->
+<div class="carregando">
+    <i class="fa-solid fa-spinner fa-spin"></i>
+    Carregando dashboards...
+</div>
+
+</div>
+
+<div id="semResultadoBusca" class="estado-vazio" hidden>
+
+    Nenhum dashboard encontrado para essa pesquisa.
 
 </div>
 
@@ -479,6 +479,8 @@ const campoPesquisa =
 
 document.getElementById("buscarDashboard");
 
+const semResultadoBusca = document.getElementById("semResultadoBusca");
+
 campoPesquisa.addEventListener("keyup",function(){
 
     const pesquisa =
@@ -506,62 +508,17 @@ campoPesquisa.addEventListener("keyup",function(){
 
     });
 
-});
+    const cardsDashboard =
 
-// ==============================
-// Categorias
-// ==============================
+    [...document.querySelectorAll("#painelBI .card-bi")];
 
-const categorias =
+    const temCardVisivel =
 
-document.querySelectorAll(".categoria");
+    cardsDashboard.some(card => card.style.display !== "none");
 
-categorias.forEach(botao=>{
+    semResultadoBusca.hidden =
 
-    botao.addEventListener("click",()=>{
-
-        categorias.forEach(c=>{
-
-            c.classList.remove("ativa");
-
-        });
-
-        botao.classList.add("ativa");
-
-        const categoriaSelecionada =
-        botao.innerText.toLowerCase();
-
-        const cards =
-
-        document.querySelectorAll(".card-bi");
-
-        cards.forEach(card=>{
-
-            if(categoriaSelecionada=="todos"){
-
-                card.style.display="flex";
-
-                return;
-
-            }
-
-            const categoria =
-
-            card.dataset.categoria.toLowerCase();
-
-            if(categoria==categoriaSelecionada){
-
-                card.style.display="flex";
-
-            }else{
-
-                card.style.display="none";
-
-            }
-
-        });
-
-    });
+    cardsDashboard.length === 0 || pesquisa === "" || temCardVisivel;
 
 });
 

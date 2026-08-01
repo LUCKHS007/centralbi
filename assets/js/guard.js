@@ -15,9 +15,14 @@ window.__sessaoCentralBI = centralBiBuscarSessao()
         return dados;
 
     })
-    .catch(() => {
+    .catch((erro) => {
 
-        window.location.replace("login.html");
+        if (erro && erro.tipoErro === "conexao") {
+            centralBiMostrarErroConexao();
+        } else {
+            window.location.replace("login.html");
+        }
+
         return null;
 
     });
