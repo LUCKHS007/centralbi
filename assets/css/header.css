@@ -3,6 +3,18 @@
    PEDREIRA SARGON
 ========================================================== */
 
+@keyframes entradaCabecalho{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
 .topo{
 
     width:100%;
@@ -14,6 +26,8 @@
     position:sticky;
 
     top:0;
+
+    animation:entradaCabecalho .5s ease;
 
     z-index:999;
 

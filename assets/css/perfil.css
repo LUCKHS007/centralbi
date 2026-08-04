@@ -438,6 +438,8 @@
 
     display:flex;
 
+    flex-wrap:wrap;
+
     align-items:center;
 
     gap:12px;
@@ -447,6 +449,100 @@
     border-bottom:1px solid #e5e9f0;
 
     font-size:13px;
+
+}
+
+.status-mini{
+
+    font-size:10px;
+
+    font-weight:600;
+
+    padding:3px 9px;
+
+    border-radius:20px;
+
+    white-space:nowrap;
+
+}
+
+.status-mini.ativo{
+
+    background:#e6f7ec;
+
+    color:#0a9e4c;
+
+}
+
+.status-mini.inativo{
+
+    background:#fdecea;
+
+    color:#d62828;
+
+}
+
+.acoes-usuario{
+
+    display:flex;
+
+    gap:8px;
+
+    margin-left:auto;
+
+    width:100%;
+
+    justify-content:flex-end;
+
+}
+
+.btn-status{
+
+    border:1px solid #d4dbe5;
+
+    background:transparent;
+
+    border-radius:8px;
+
+    padding:6px 10px;
+
+    font-size:11px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    white-space:nowrap;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.btn-status.desativar{
+
+    color:#d62828;
+
+}
+
+.btn-status.desativar:hover{
+
+    background:#fdecea;
+
+}
+
+.btn-status.ativar{
+
+    color:#0a9e4c;
+
+}
+
+.btn-status.ativar:hover{
+
+    background:#e6f7ec;
 
 }
 
@@ -599,6 +695,52 @@
 
     font-weight:500;
 
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.senha-gerada-aviso[hidden]{
+
+    display:none;
+
+}
+
+.senha-gerada-aviso span{
+
+    flex:1;
+
+}
+
+.botao-copiar-senha{
+
+    border:1px solid rgba(0,87,184,.3);
+
+    background:transparent;
+
+    border-radius:8px;
+
+    width:34px;
+
+    height:34px;
+
+    color:#0057b8;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+
+    transition:.2s;
+
+}
+
+.botao-copiar-senha:hover{
+
+    background:rgba(0,87,184,.1);
+
 }
 
 .senha-gerada-aviso.erro{
@@ -606,5 +748,79 @@
     background:#fdecea;
 
     color:#d62828;
+
+}
+
+/* HISTÓRICO DE ACESSOS */
+
+.lista-historico-acessos{
+
+    background:#f8fafc;
+
+    border-radius:14px;
+
+    border:1px solid #e5e9f0;
+
+    overflow:hidden;
+
+    max-height:220px;
+
+    overflow-y:auto;
+
+}
+
+.linha-historico{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:10px 16px;
+
+    border-bottom:1px solid #e5e9f0;
+
+    font-size:12px;
+
+}
+
+.linha-historico:last-child{
+
+    border-bottom:none;
+
+}
+
+.historico-nome{
+
+    font-weight:500;
+
+    color:#1e293b;
+
+    flex-shrink:0;
+
+}
+
+.historico-dashboard{
+
+    color:#6b7280;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+.historico-quando{
+
+    margin-left:auto;
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    white-space:nowrap;
 
 }

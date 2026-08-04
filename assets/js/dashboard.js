@@ -36,7 +36,7 @@ function criarCardBi(item, { href, categoria, textoAbrir }){
 
     }
 
-    card.addEventListener("click", () => registrarAcessoRecente(item));
+    card.addEventListener("click", () => registrarAcessoNoServidor(item));
 
     const icone = document.createElement("i");
     icone.className = `fa-solid ${item.icone}`;
@@ -64,78 +64,15 @@ function criarCardBi(item, { href, categoria, textoAbrir }){
 
 }
 
-/* ==========================================================
-   Acessados recentemente
-========================================================== */
+function registrarAcessoNoServidor(item){
 
-const CHAVE_RECENTES = "centralBiAcessosRecentes";
-const MAX_RECENTES = 3;
-
-function registrarAcessoRecente(item){
-
-    let recentes = [];
-
-    try {
-        recentes = JSON.parse(localStorage.getItem(CHAVE_RECENTES)) || [];
-    } catch {
-        recentes = [];
-    }
-
-    recentes = recentes.filter(r => r.titulo !== item.titulo);
-    recentes.unshift({ titulo: item.titulo, icone: item.icone });
-    recentes = recentes.slice(0, MAX_RECENTES);
-
-    localStorage.setItem(CHAVE_RECENTES, JSON.stringify(recentes));
-
-}
-
-function renderizarRecentes(listaDashboards){
-
-    const secao = document.getElementById("secaoRecentes");
-    const strip = document.getElementById("recentesStrip");
-
-    if (!secao || !strip) return;
-
-    let recentes = [];
-
-    try {
-        recentes = JSON.parse(localStorage.getItem(CHAVE_RECENTES)) || [];
-    } catch {
-        recentes = [];
-    }
-
-    const titulosDisponiveis = new Set(listaDashboards.map(item => item.titulo));
-    recentes = recentes.filter(r => titulosDisponiveis.has(r.titulo));
-
-    strip.innerHTML = "";
-
-    if (recentes.length === 0){
-        secao.hidden = true;
-        return;
-    }
-
-    secao.hidden = false;
-
-    recentes.forEach(r => {
-
-        const mini = document.createElement("a");
-        mini.className = "recente-mini";
-        mini.href = "#";
-
-        const item = listaDashboards.find(i => i.titulo === r.titulo);
-        if (item) mini.href = item.link;
-        mini.target = "_blank";
-        mini.rel = "noopener";
-
-        const icone = document.createElement("i");
-        icone.className = `fa-solid ${r.icone}`;
-        mini.appendChild(icone);
-
-        mini.append(r.titulo);
-
-        strip.appendChild(mini);
-
-    });
+    // Fire-and-forget: não trava a navegação nem mostra erro pro usuário comum.
+    fetch("/.netlify/functions/registrar-acesso", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ dashboardId: item.id, titulo: item.titulo }),
+        credentials: "same-origin",
+    }).catch(() => {});
 
 }
 
@@ -276,7 +213,6 @@ window.__sessaoCentralBI.then((sessao) => {
     renderizarDashboards(sessao.dashboards);
     renderizarLinks(sessao.linksExternos);
     configurarCategorias(sessao.dashboards);
-    renderizarRecentes(sessao.dashboards);
 
     document.getElementById("totalDashboards").textContent =
         sessao.dashboards.length;

@@ -40,7 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            window.location.href = "index.html";
+            document.querySelector(".login-container").classList.add("saindo");
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 450);
+
             return;
 
         } catch {

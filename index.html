@@ -297,7 +297,21 @@
 
         <div id="mensagemNovoUsuario"></div>
 
-        <div id="senhaGeradaAviso" class="senha-gerada-aviso" hidden></div>
+        <div id="senhaGeradaAviso" class="senha-gerada-aviso" hidden>
+            <span id="senhaGeradaTexto"></span>
+            <button type="button" id="botaoCopiarSenha" class="botao-copiar-senha" onclick="copiarSenhaGerada()" title="Copiar">
+                <i class="fa-solid fa-copy"></i>
+            </button>
+        </div>
+
+        <hr class="perfil-divisor">
+
+        <h3>
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            Histórico de acessos
+        </h3>
+
+        <div id="listaHistoricoAcessos" class="lista-historico-acessos"></div>
 
     </div>
 
@@ -444,16 +458,6 @@ Acesso Rápido
 </div>
 
 </button>
-
-</section>
-
-<section id="secaoRecentes" class="recentes" hidden>
-
-<h2 class="titulo-secao titulo-recentes">
-    <i class="fa-solid fa-clock-rotate-left"></i> Acessado recentemente
-</h2>
-
-<div id="recentesStrip" class="recentes-strip"></div>
 
 </section>
 

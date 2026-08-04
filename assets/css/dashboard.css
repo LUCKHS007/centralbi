@@ -7,6 +7,22 @@ main{
 
     width:100%;
 
+    animation:entradaPagina .5s ease;
+
+}
+
+@keyframes entradaPagina{
+
+    from{
+        opacity:0;
+        transform:translateY(10px) scale(.99);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
 }
 
 /* HERO */
@@ -132,7 +148,7 @@ main{
 
     max-width:1400px;
 
-    margin:auto;
+    margin:0 auto 32px;
 
     padding:0 35px;
 
@@ -789,89 +805,6 @@ footer{
 
 }
 
-/* ACESSADO RECENTEMENTE */
-
-.recentes{
-
-    max-width:1400px;
-
-    margin:0 auto 24px;
-
-    padding:0 35px;
-
-}
-
-.titulo-recentes{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    font-size:14px;
-
-    text-transform:uppercase;
-
-    letter-spacing:.03em;
-
-    color:#6b7280;
-
-}
-
-.recentes-strip{
-
-    display:flex;
-
-    gap:14px;
-
-    flex-wrap:wrap;
-
-    margin-top:10px;
-
-}
-
-.recente-mini{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    background:#ffffff;
-
-    border-radius:12px;
-
-    padding:10px 16px;
-
-    box-shadow:0 6px 18px rgba(0,0,0,.08);
-
-    color:#1e293b;
-
-    font-size:13px;
-
-    font-weight:500;
-
-    transition:.25s;
-
-}
-
-.recente-mini:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
-
-}
-
-.recente-mini i{
-
-    color:#0057b8;
-
-    font-size:15px;
-
-}
 
 /* SKELETON DOS CARDS DE ESTATÍSTICA */
 

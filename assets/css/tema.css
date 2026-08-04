@@ -383,27 +383,6 @@ html:not([data-tema="claro"]) .badge-categoria{
 
 }
 
-html:not([data-tema="claro"]) .titulo-recentes{
-
-    color:var(--tema-texto-secundario);
-
-}
-
-html:not([data-tema="claro"]) .recente-mini{
-
-    background:var(--tema-fundo-card);
-
-    color:var(--tema-texto);
-
-    border:1px solid var(--tema-borda);
-
-}
-
-html:not([data-tema="claro"]) .recente-mini i{
-
-    color:var(--tema-acento-texto);
-
-}
 
 html:not([data-tema="claro"]) .skel-bar-stat{
 
@@ -519,6 +498,64 @@ html:not([data-tema="claro"]) .senha-gerada-aviso{
     background:var(--tema-icone-fundo);
 
     color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .botao-copiar-senha{
+
+    border-color:var(--tema-borda);
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .botao-copiar-senha:hover{
+
+    background:var(--tema-fundo-cabecalho);
+
+}
+
+html:not([data-tema="claro"]) .btn-status{
+
+    border-color:var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .btn-status:hover{
+
+    background:var(--tema-fundo-cabecalho);
+
+}
+
+html:not([data-tema="claro"]) .lista-historico-acessos{
+
+    background:var(--tema-fundo);
+
+    border-color:var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .linha-historico{
+
+    border-bottom-color:var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .historico-nome{
+
+    color:var(--tema-texto);
+
+}
+
+html:not([data-tema="claro"]) .historico-dashboard{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) .historico-quando{
+
+    color:var(--tema-texto-secundario);
 
 }
 

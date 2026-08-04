@@ -42,10 +42,24 @@ create table permissoes_cargo (
     primary key (cargo, permissao)
 );
 
+-- Histórico de acessos aos dashboards (nome/título gravados no
+-- momento do acesso, não depende de join com usuarios/dashboards).
+create table acessos_log (
+    id bigserial primary key,
+    usuario_id uuid references usuarios(id) on delete set null,
+    usuario_nome text not null,
+    dashboard_id text not null,
+    dashboard_titulo text not null,
+    criado_em timestamptz not null default now()
+);
+
+create index acessos_log_criado_em_idx on acessos_log (criado_em desc);
+
 alter table usuarios enable row level security;
 alter table dashboards enable row level security;
 alter table links_externos enable row level security;
 alter table permissoes_cargo enable row level security;
+alter table acessos_log enable row level security;
 -- Nenhuma policy criada de propósito: só a service_role (bypassa RLS)
 -- consegue acessar essas tabelas.
 
