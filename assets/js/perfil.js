@@ -15,6 +15,7 @@ async function abrirPerfil(){
     document.getElementById("perfilCargo").textContent = "Carregando...";
 
     modalPerfil.hidden = false;
+    document.body.classList.add("modal-aberto");
 
     try {
 
@@ -40,6 +41,7 @@ async function abrirPerfil(){
 function fecharPerfil(){
 
     modalPerfil.hidden = true;
+    if (modalUsuarios.hidden && modalHistorico.hidden) document.body.classList.remove("modal-aberto");
 
 }
 

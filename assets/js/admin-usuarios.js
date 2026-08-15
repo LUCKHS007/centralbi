@@ -12,7 +12,6 @@ const formNovoUsuario = document.getElementById("formNovoUsuario");
 const mensagemNovoUsuario = document.getElementById("mensagemNovoUsuario");
 const senhaGeradaAviso = document.getElementById("senhaGeradaAviso");
 const senhaGeradaTexto = document.getElementById("senhaGeradaTexto");
-const listaHistoricoAcessos = document.getElementById("listaHistoricoAcessos");
 
 window.__sessaoCentralBI.then((sessao) => {
 
@@ -40,8 +39,13 @@ function obterIniciaisUsuario(nome){
 
 function renderizarLinhaUsuario(usuario){
 
-    const linha = document.createElement("div");
+    const card = document.createElement("div");
+    card.className = "card-usuario";
+
+    const linha = document.createElement("button");
+    linha.type = "button";
     linha.className = "linha-usuario";
+    linha.setAttribute("aria-expanded", "false");
 
     const avatar = document.createElement("span");
     avatar.className = "avatar-mini";
@@ -73,28 +77,164 @@ function renderizarLinhaUsuario(usuario){
     status.textContent = usuario.ativo ? "Ativo" : "Inativo";
     linha.appendChild(status);
 
-    const acoes = document.createElement("div");
-    acoes.className = "acoes-usuario";
+    const setaExpandir = document.createElement("i");
+    setaExpandir.className = "fa-solid fa-chevron-down seta-expandir";
+    linha.appendChild(setaExpandir);
 
-    const botaoRedefinir = document.createElement("button");
-    botaoRedefinir.type = "button";
-    botaoRedefinir.className = "btn-redefinir";
-    botaoRedefinir.innerHTML = '<i class="fa-solid fa-rotate"></i> Redefinir senha';
-    botaoRedefinir.addEventListener("click", () => redefinirSenhaUsuario(usuario, botaoRedefinir));
-    acoes.appendChild(botaoRedefinir);
+    const detalhe = montarDetalheUsuario(usuario);
+
+    linha.addEventListener("click", () => {
+
+        const abrindo = detalhe.hidden;
+        detalhe.hidden = !abrindo;
+        linha.setAttribute("aria-expanded", String(abrindo));
+        card.classList.toggle("expandido", abrindo);
+
+    });
+
+    card.appendChild(linha);
+    card.appendChild(detalhe);
+
+    return card;
+
+}
+
+function montarDetalheUsuario(usuario){
+
+    const detalhe = document.createElement("div");
+    detalhe.className = "detalhe-usuario";
+    detalhe.hidden = true;
+
+    const grade = document.createElement("div");
+    grade.className = "detalhe-grade";
+    grade.innerHTML = `
+        <div><span>Nome completo</span><strong>${escaparHtml(usuario.nome)}</strong></div>
+        <div><span>Usuário de login</span><strong>${escaparHtml(usuario.usuario)}</strong></div>
+        <div><span>Cargo</span><strong>${escaparHtml(usuario.cargo)}</strong></div>
+        <div><span>Status</span><strong>${usuario.ativo ? "Ativo" : "Inativo"}</strong></div>
+    `;
+    detalhe.appendChild(grade);
+
+    const avisoSenha = document.createElement("p");
+    avisoSenha.className = "detalhe-aviso-senha";
+    avisoSenha.innerHTML = '<i class="fa-solid fa-lock"></i> A senha atual não pode ser exibida (fica salva de forma criptografada). Você pode definir uma nova abaixo.';
+    detalhe.appendChild(avisoSenha);
+
+    const formSenha = document.createElement("form");
+    formSenha.className = "form-nova-senha";
+
+    const grupoInput = document.createElement("div");
+    grupoInput.className = "input-group-senha";
+
+    const inputSenha = document.createElement("input");
+    inputSenha.type = "password";
+    inputSenha.placeholder = "Nova senha (mín. 6 caracteres)";
+    inputSenha.minLength = 6;
+    inputSenha.autocomplete = "new-password";
+    grupoInput.appendChild(inputSenha);
+
+    const botaoMostrar = document.createElement("button");
+    botaoMostrar.type = "button";
+    botaoMostrar.className = "botao-mostrar-senha-inline";
+    botaoMostrar.innerHTML = '<i class="fa-solid fa-eye"></i>';
+    botaoMostrar.addEventListener("click", () => {
+        const mostrando = inputSenha.type === "text";
+        inputSenha.type = mostrando ? "password" : "text";
+        botaoMostrar.innerHTML = mostrando ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-eye-slash"></i>';
+    });
+    grupoInput.appendChild(botaoMostrar);
+
+    formSenha.appendChild(grupoInput);
+
+    const linhaBotoesSenha = document.createElement("div");
+    linhaBotoesSenha.className = "linha-botoes-senha";
+
+    const botaoSalvarSenha = document.createElement("button");
+    botaoSalvarSenha.type = "submit";
+    botaoSalvarSenha.className = "btn-salvar-senha";
+    botaoSalvarSenha.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Salvar senha';
+    linhaBotoesSenha.appendChild(botaoSalvarSenha);
+
+    const botaoAleatoria = document.createElement("button");
+    botaoAleatoria.type = "button";
+    botaoAleatoria.className = "btn-redefinir";
+    botaoAleatoria.innerHTML = '<i class="fa-solid fa-shuffle"></i> Gerar aleatória';
+    botaoAleatoria.addEventListener("click", () => redefinirSenhaUsuario(usuario, botaoAleatoria));
+    linhaBotoesSenha.appendChild(botaoAleatoria);
+
+    formSenha.appendChild(linhaBotoesSenha);
+
+    const mensagemSenhaDetalhe = document.createElement("p");
+    mensagemSenhaDetalhe.className = "mensagem-senha-detalhe";
+    formSenha.appendChild(mensagemSenhaDetalhe);
+
+    formSenha.addEventListener("submit", (e) => {
+        e.preventDefault();
+        definirSenhaCustomizada(usuario, inputSenha, botaoSalvarSenha, mensagemSenhaDetalhe);
+    });
+
+    detalhe.appendChild(formSenha);
 
     const botaoStatus = document.createElement("button");
     botaoStatus.type = "button";
     botaoStatus.className = usuario.ativo ? "btn-status desativar" : "btn-status ativar";
     botaoStatus.innerHTML = usuario.ativo
-        ? '<i class="fa-solid fa-user-slash"></i> Desativar'
-        : '<i class="fa-solid fa-user-check"></i> Ativar';
+        ? '<i class="fa-solid fa-user-slash"></i> Desativar usuário'
+        : '<i class="fa-solid fa-user-check"></i> Ativar usuário';
     botaoStatus.addEventListener("click", () => alternarStatusUsuario(usuario, botaoStatus));
-    acoes.appendChild(botaoStatus);
+    detalhe.appendChild(botaoStatus);
 
-    linha.appendChild(acoes);
+    return detalhe;
 
-    return linha;
+}
+
+async function definirSenhaCustomizada(usuario, inputSenha, botao, mensagemEl){
+
+    const novaSenha = inputSenha.value;
+
+    if (novaSenha.length < 6){
+        mensagemEl.textContent = "A senha precisa ter pelo menos 6 caracteres.";
+        mensagemEl.className = "mensagem-senha-detalhe erro";
+        return;
+    }
+
+    const textoOriginal = botao.innerHTML;
+    botao.disabled = true;
+    botao.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+    mensagemEl.textContent = "";
+
+    try {
+
+        const resposta = await fetch("/.netlify/functions/redefinir-senha-usuario", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ usuarioId: usuario.id, novaSenha }),
+            credentials: "same-origin",
+        });
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok){
+            mensagemEl.textContent = dados.erro || "Não foi possível salvar a senha.";
+            mensagemEl.className = "mensagem-senha-detalhe erro";
+            return;
+        }
+
+        mensagemEl.textContent = `Senha de ${usuario.nome} atualizada.`;
+        mensagemEl.className = "mensagem-senha-detalhe sucesso";
+        inputSenha.value = "";
+
+    } catch {
+
+        mensagemEl.textContent = "Não foi possível conectar. Tente novamente.";
+        mensagemEl.className = "mensagem-senha-detalhe erro";
+
+    } finally {
+
+        botao.disabled = false;
+        botao.innerHTML = textoOriginal;
+
+    }
 
 }
 
@@ -246,82 +386,23 @@ function copiarSenhaGerada(){
 
 }
 
-function formatarDataHistorico(isoString){
-
-    const data = new Date(isoString);
-    return data.toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
-
-}
-
-async function carregarHistoricoAcessos(){
-
-    listaHistoricoAcessos.innerHTML = '<div class="carregando-usuarios"><i class="fa-solid fa-spinner fa-spin"></i> Carregando...</div>';
-
-    try {
-
-        const resposta = await fetch("/.netlify/functions/historico-acessos", { credentials: "same-origin" });
-        const dados = await resposta.json();
-
-        if (!resposta.ok){
-            listaHistoricoAcessos.innerHTML = `<div class="erro-lista-usuarios">${escaparHtml(dados.erro || "Não foi possível carregar o histórico.")}</div>`;
-            return;
-        }
-
-        if (dados.acessos.length === 0){
-            listaHistoricoAcessos.innerHTML = '<div class="erro-lista-usuarios">Ainda não há acessos registrados.</div>';
-            return;
-        }
-
-        listaHistoricoAcessos.innerHTML = "";
-
-        dados.acessos.forEach((acesso) => {
-
-            const linha = document.createElement("div");
-            linha.className = "linha-historico";
-
-            const nome = document.createElement("span");
-            nome.className = "historico-nome";
-            nome.textContent = acesso.usuario_nome;
-            linha.appendChild(nome);
-
-            const dashboard = document.createElement("span");
-            dashboard.className = "historico-dashboard";
-            dashboard.textContent = acesso.dashboard_titulo;
-            linha.appendChild(dashboard);
-
-            const quando = document.createElement("span");
-            quando.className = "historico-quando";
-            quando.textContent = formatarDataHistorico(acesso.criado_em);
-            linha.appendChild(quando);
-
-            listaHistoricoAcessos.appendChild(linha);
-
-        });
-
-    } catch {
-
-        listaHistoricoAcessos.innerHTML = '<div class="erro-lista-usuarios">Não foi possível conectar. Tente novamente.</div>';
-
-    }
-
-}
-
 function abrirUsuarios(){
 
     fecharPerfil();
     modalUsuarios.hidden = false;
+    document.body.classList.add("modal-aberto");
     senhaGeradaAviso.hidden = true;
     mensagemNovoUsuario.textContent = "";
     formNovoUsuario.reset();
 
     carregarUsuarios();
-    carregarHistoricoAcessos();
 
 }
 
 function fecharUsuarios(){
 
     modalUsuarios.hidden = true;
+    if (modalPerfil.hidden && modalHistorico.hidden) document.body.classList.remove("modal-aberto");
 
 }
 

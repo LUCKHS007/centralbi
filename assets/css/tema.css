@@ -486,6 +486,52 @@ html:not([data-tema="claro"]) .btn-redefinir:hover{
 
 }
 
+html:not([data-tema="claro"]) .linha-usuario:hover{
+
+    background:var(--tema-fundo-cabecalho);
+
+}
+
+html:not([data-tema="claro"]) .detalhe-grade,
+html:not([data-tema="claro"]) .detalhe-aviso-senha,
+html:not([data-tema="claro"]) .input-group-senha{
+
+    background:var(--tema-fundo);
+
+    border-color:var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .detalhe-grade strong{
+
+    color:var(--tema-texto);
+
+}
+
+html:not([data-tema="claro"]) .detalhe-aviso-senha{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) .input-group-senha input{
+
+    color:var(--tema-texto);
+
+}
+
+html:not([data-tema="claro"]) .botao-mostrar-senha-inline{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) .botao-mostrar-senha-inline:hover{
+
+    color:var(--tema-acento-texto);
+
+}
+
 html:not([data-tema="claro"]) .carregando-usuarios,
 html:not([data-tema="claro"]) .erro-lista-usuarios{
 
@@ -527,7 +573,10 @@ html:not([data-tema="claro"]) .btn-status:hover{
 
 }
 
-html:not([data-tema="claro"]) .lista-historico-acessos{
+html:not([data-tema="claro"]) .hist-stat,
+html:not([data-tema="claro"]) .hist-card,
+html:not([data-tema="claro"]) .hist-campo,
+html:not([data-tema="claro"]) .hist-tabela-caixa{
 
     background:var(--tema-fundo);
 
@@ -535,27 +584,99 @@ html:not([data-tema="claro"]) .lista-historico-acessos{
 
 }
 
-html:not([data-tema="claro"]) .linha-historico{
+html:not([data-tema="claro"]) .hist-stat-rotulo,
+html:not([data-tema="claro"]) .hist-stat-total,
+html:not([data-tema="claro"]) .hist-ranking-vazio,
+html:not([data-tema="claro"]) .hist-pos,
+html:not([data-tema="claro"]) .hist-qtd,
+html:not([data-tema="claro"]) .hist-campo,
+html:not([data-tema="claro"]) .hist-tabela thead th,
+html:not([data-tema="claro"]) .hist-tabela-vazia,
+html:not([data-tema="claro"]) .hist-quando,
+html:not([data-tema="claro"]) .hist-paginacao{
 
-    border-bottom-color:var(--tema-borda);
+    color:var(--tema-texto-secundario);
 
 }
 
-html:not([data-tema="claro"]) .historico-nome{
+html:not([data-tema="claro"]) .hist-stat-valor,
+html:not([data-tema="claro"]) .hist-nome,
+html:not([data-tema="claro"]) .hist-campo input,
+html:not([data-tema="claro"]) .hist-campo select{
 
     color:var(--tema-texto);
 
 }
 
-html:not([data-tema="claro"]) .historico-dashboard{
+html:not([data-tema="claro"]) .hist-card h4{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .hist-barra-fundo{
+
+    background:var(--tema-icone-fundo);
+
+}
+
+html:not([data-tema="claro"]) .hist-barra{
+
+    background:var(--tema-acento-fundo);
+
+}
+
+html:not([data-tema="claro"]) .hist-tabela thead th{
+
+    background:var(--tema-fundo-cabecalho);
+
+    border-bottom-color:var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .hist-tabela tbody td{
+
+    border-bottom-color:var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .hist-avatar{
+
+    background:var(--tema-icone-fundo);
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .hist-paginacao-botoes button{
+
+    background:var(--tema-fundo-card);
+
+    border-color:var(--tema-borda);
 
     color:var(--tema-texto-secundario);
 
 }
 
-html:not([data-tema="claro"]) .historico-quando{
+html:not([data-tema="claro"]) .hist-paginacao-botoes button:hover:not(:disabled){
 
-    color:var(--tema-texto-secundario);
+    border-color:var(--tema-acento-fundo);
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .hist-campo select{
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+
+}
+
+html:not([data-tema="claro"]) .hist-campo select option{
+
+    background:var(--tema-fundo-card);
+
+    color:var(--tema-texto);
 
 }
 

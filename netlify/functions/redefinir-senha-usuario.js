@@ -2,6 +2,8 @@ const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const { exigirAdmin } = require("./_admin");
 
+const TAMANHO_MINIMO_SENHA = 6;
+
 function gerarSenha() {
     return crypto.randomBytes(6).toString("base64").replace(/[+/=]/g, "").slice(0, 8);
 }
@@ -14,15 +16,19 @@ exports.handler = async (event) => {
     const { supabase, erro } = await exigirAdmin(event);
     if (erro) return erro;
 
-    let usuarioId;
+    let usuarioId, novaSenhaEscolhida;
     try {
-        ({ usuarioId } = JSON.parse(event.body || "{}"));
+        ({ usuarioId, novaSenha: novaSenhaEscolhida } = JSON.parse(event.body || "{}"));
     } catch {
         return { statusCode: 400, body: JSON.stringify({ erro: "Requisição inválida" }) };
     }
 
     if (!usuarioId) {
         return { statusCode: 400, body: JSON.stringify({ erro: "Usuário não informado." }) };
+    }
+
+    if (novaSenhaEscolhida && novaSenhaEscolhida.length < TAMANHO_MINIMO_SENHA) {
+        return { statusCode: 400, body: JSON.stringify({ erro: `A senha precisa ter pelo menos ${TAMANHO_MINIMO_SENHA} caracteres.` }) };
     }
 
     const { data: alvo, error: erroBusca } = await supabase
@@ -35,7 +41,7 @@ exports.handler = async (event) => {
         return { statusCode: 404, body: JSON.stringify({ erro: "Usuário não encontrado." }) };
     }
 
-    const novaSenha = gerarSenha();
+    const novaSenha = novaSenhaEscolhida || gerarSenha();
     const hash = await bcrypt.hash(novaSenha, 10);
 
     const { error: erroUpdate } = await supabase

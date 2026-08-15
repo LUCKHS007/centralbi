@@ -240,6 +240,88 @@
 
 </div>
 
+<div id="modalHistorico" class="modal-overlay" hidden>
+
+    <div class="modal-caixa modal-historico">
+
+        <button class="modal-fechar" onclick="fecharHistorico()" aria-label="Fechar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h2><i class="fa-solid fa-clock-rotate-left"></i> Histórico de acessos</h2>
+
+        <div class="hist-stats" id="histStats"></div>
+
+        <div class="hist-painel">
+            <div class="hist-card hist-card-grafico">
+                <h4>Acessos por dia</h4>
+                <canvas id="histGrafico" width="640" height="160"></canvas>
+            </div>
+            <div class="hist-card">
+                <h4>Painéis mais acessados</h4>
+                <ul class="hist-ranking" id="histRankingPaineis"></ul>
+            </div>
+        </div>
+
+        <div class="hist-painel">
+            <div class="hist-card">
+                <h4>Usuários mais ativos</h4>
+                <ul class="hist-ranking" id="histRankingUsuarios"></ul>
+            </div>
+            <div class="hist-card">
+                <h4>Acessos por cargo</h4>
+                <ul class="hist-ranking" id="histRankingCargos"></ul>
+            </div>
+        </div>
+
+        <div class="hist-filtros">
+            <div class="hist-campo hist-busca">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="histBusca" placeholder="Buscar por nome...">
+            </div>
+            <div class="hist-campo">
+                <i class="fa-solid fa-calendar-days"></i>
+                <select id="histPeriodo">
+                    <option value="7">Últimos 7 dias</option>
+                    <option value="30" selected>Últimos 30 dias</option>
+                    <option value="90">Últimos 90 dias</option>
+                </select>
+            </div>
+            <div class="hist-campo">
+                <i class="fa-solid fa-table-cells"></i>
+                <select id="histDashboard">
+                    <option value="">Todos os painéis</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="hist-tabela-caixa">
+            <div class="hist-tabela-scroll">
+                <table class="hist-tabela">
+                    <thead>
+                        <tr>
+                            <th>Usuário</th>
+                            <th>Painel acessado</th>
+                            <th>Quando</th>
+                        </tr>
+                    </thead>
+                    <tbody id="histCorpoTabela"></tbody>
+                </table>
+            </div>
+            <div class="hist-paginacao">
+                <span id="histContagem"></span>
+                <div class="hist-paginacao-botoes">
+                    <button id="histPaginaAnterior" aria-label="Página anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                    <span id="histPaginaAtual"></span>
+                    <button id="histPaginaProxima" aria-label="Próxima página"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 <div id="modalUsuarios" class="modal-overlay" hidden>
 
     <div class="modal-caixa modal-usuarios">
@@ -306,12 +388,10 @@
 
         <hr class="perfil-divisor">
 
-        <h3>
+        <button type="button" class="btn-gerenciar-usuarios" onclick="abrirHistorico()">
             <i class="fa-solid fa-clock-rotate-left"></i>
             Histórico de acessos
-        </h3>
-
-        <div id="listaHistoricoAcessos" class="lista-historico-acessos"></div>
+        </button>
 
     </div>
 
@@ -560,6 +640,7 @@ pelo dashboard.js
 <script src="assets/js/perfil.js"></script>
 
 <script src="assets/js/admin-usuarios.js"></script>
+<script src="assets/js/historico.js"></script>
 
 <script src="assets/js/dashboard.js"></script>
 

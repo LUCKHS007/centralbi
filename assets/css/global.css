@@ -25,6 +25,12 @@ body{
 
 }
 
+body.modal-aberto{
+
+    overflow:hidden;
+
+}
+
 a{
 
     text-decoration:none;
