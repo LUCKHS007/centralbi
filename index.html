@@ -236,6 +236,69 @@
             <span class="tag-admin">admin</span>
         </button>
 
+        <div id="secao2fa" class="secao-2fa" hidden>
+
+            <h3>
+                <i class="fa-solid fa-shield-halved"></i>
+                Verificação em duas etapas
+            </h3>
+
+            <div id="statusInativo2fa" class="estado-2fa" hidden>
+
+                <p>Peça um código do app autenticador (Google Authenticator, Authy...) toda vez que fizer login em um novo aparelho.</p>
+
+                <button type="button" class="btn-gerenciar-usuarios" onclick="iniciarConfiguracao2fa()">
+                    <i class="fa-solid fa-qrcode"></i>
+                    Ativar verificação em duas etapas
+                </button>
+
+            </div>
+
+            <div id="statusAtivo2fa" class="estado-2fa" hidden>
+
+                <p class="texto-2fa-ativo"><i class="fa-solid fa-circle-check"></i> Verificação em duas etapas ativada.</p>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="senhaDesativar2fa" placeholder="Confirme sua senha pra desativar" autocomplete="current-password">
+                </div>
+
+                <button type="button" class="btn-status desativar" onclick="desativar2fa()">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Desativar
+                </button>
+
+            </div>
+
+            <div id="configuracao2fa" class="config-2fa" hidden>
+
+                <p>Escaneie o código com o app autenticador ou digite a chave manualmente, depois confirme com o código gerado.</p>
+
+                <img id="qrCode2fa" alt="QR code da verificação em duas etapas">
+
+                <div class="chave-manual-2fa">
+                    <span id="chaveManual2fa"></span>
+                    <button type="button" id="botaoCopiarChave2fa" title="Copiar"><i class="fa-solid fa-copy"></i></button>
+                </div>
+
+                <form id="formConfirmar2fa">
+                    <div class="input-group">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <input type="text" id="codigoConfirmar2fa" placeholder="000000" inputmode="numeric" maxlength="6" required>
+                    </div>
+                    <button type="submit" class="btn-login">
+                        <i class="fa-solid fa-check"></i>
+                        Confirmar e ativar
+                    </button>
+                    <button type="button" class="botao-voltar-2fa" onclick="cancelarConfiguracao2fa()">Cancelar</button>
+                </form>
+
+            </div>
+
+            <div id="mensagem2fa"></div>
+
+        </div>
+
     </div>
 
 </div>
@@ -641,6 +704,7 @@ pelo dashboard.js
 
 <script src="assets/js/admin-usuarios.js"></script>
 <script src="assets/js/historico.js"></script>
+<script src="assets/js/totp.js"></script>
 
 <script src="assets/js/dashboard.js"></script>
 

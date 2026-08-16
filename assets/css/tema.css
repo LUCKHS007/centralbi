@@ -532,6 +532,46 @@ html:not([data-tema="claro"]) .botao-mostrar-senha-inline:hover{
 
 }
 
+html:not([data-tema="claro"]) .secao-2fa{
+
+    border-top-color:var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .secao-2fa h3{
+
+    color:var(--tema-acento-texto);
+
+}
+
+html:not([data-tema="claro"]) .estado-2fa p,
+html:not([data-tema="claro"]) .config-2fa p{
+
+    color:var(--tema-texto-secundario);
+
+}
+
+html:not([data-tema="claro"]) #qrCode2fa,
+html:not([data-tema="claro"]) .chave-manual-2fa{
+
+    background:var(--tema-fundo);
+
+    border-color:var(--tema-borda);
+
+}
+
+html:not([data-tema="claro"]) .chave-manual-2fa span{
+
+    color:var(--tema-texto);
+
+}
+
+html:not([data-tema="claro"]) .chave-manual-2fa button{
+
+    color:var(--tema-acento-texto);
+
+}
+
 html:not([data-tema="claro"]) .carregando-usuarios,
 html:not([data-tema="claro"]) .erro-lista-usuarios{
 

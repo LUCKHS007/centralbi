@@ -14,7 +14,9 @@ create table usuarios (
     cargo text not null,
     ativo boolean not null default true,
     tema text not null default 'claro',
-    sessao_versao integer not null default 1
+    sessao_versao integer not null default 1,
+    totp_secret text,
+    totp_ativo boolean not null default false
 );
 
 create table dashboards (

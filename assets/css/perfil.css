@@ -744,6 +744,155 @@
 
 }
 
+/* VERIFICAÇÃO EM DUAS ETAPAS */
+
+.secao-2fa{
+
+    margin-top:22px;
+
+    padding-top:22px;
+
+    border-top:1px solid #e5e7eb;
+
+}
+
+.secao-2fa h3{
+
+    color:#0057b8;
+
+    font-size:16px;
+
+    margin-bottom:14px;
+
+}
+
+.estado-2fa p,
+.config-2fa p{
+
+    font-size:13px;
+
+    color:#5b6b81;
+
+    margin-bottom:14px;
+
+}
+
+.texto-2fa-ativo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#0a9e4c !important;
+
+    font-weight:600;
+
+}
+
+.config-2fa{
+
+    text-align:center;
+
+}
+
+#qrCode2fa{
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:10px;
+
+    border:1px solid #e5e9f0;
+
+    margin-bottom:12px;
+
+}
+
+.chave-manual-2fa{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    background:#f8fafc;
+
+    border:1px solid #e5e9f0;
+
+    border-radius:9px;
+
+    padding:8px 12px;
+
+    margin-bottom:18px;
+
+    font-size:13px;
+
+}
+
+.chave-manual-2fa span{
+
+    letter-spacing:1px;
+
+    font-family:monospace;
+
+    color:#1e293b;
+
+    word-break:break-all;
+
+}
+
+.chave-manual-2fa button{
+
+    border:none;
+
+    background:none;
+
+    color:#0057b8;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+
+}
+
+#formConfirmar2fa #codigoConfirmar2fa{
+
+    text-align:center;
+
+    letter-spacing:6px;
+
+    font-size:18px;
+
+}
+
+.mensagem-2fa{
+
+    margin-top:12px;
+
+    font-size:12.5px;
+
+    text-align:center;
+
+}
+
+.mensagem-2fa.sucesso{
+
+    color:#0a9e4c;
+
+}
+
+.mensagem-2fa.erro{
+
+    color:#d62828;
+
+}
+
 .status-mini{
 
     font-size:10px;

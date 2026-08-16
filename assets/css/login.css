@@ -296,6 +296,52 @@ body{
 
 }
 
+.texto-2fa{
+
+    text-align:center;
+
+    color:#5b6b81;
+
+    font-size:13.5px;
+
+    margin-bottom:18px;
+
+}
+
+#codigo2fa{
+
+    letter-spacing:6px;
+
+    font-size:20px;
+
+    text-align:center;
+
+}
+
+.botao-voltar-2fa{
+
+    width:100%;
+
+    background:none;
+
+    border:none;
+
+    color:#5b6b81;
+
+    font-size:13px;
+
+    padding:12px 0 0;
+
+    cursor:pointer;
+
+}
+
+.botao-voltar-2fa:hover{
+
+    color:#0057b8;
+
+}
+
 #erroLogin{
 
     text-align:center;
