@@ -1,11 +1,12 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const { authenticator } = require("otplib");
 const QRCode = require("qrcode");
-const { exigirAdmin } = require("./_admin");
+const { getSupabase } = require("./_supabase");
+const { lerCookie } = require("./_cookie");
 
-// Só o admin.net pode configurar 2FA — é a conta mais sensível
-// (gerencia usuários e senhas de todo mundo). exigirAdmin já garante
-// que quem está chamando é exatamente essa conta.
+// Qualquer usuário logado pode configurar a própria verificação em duas
+// etapas — é opcional, cada um decide se quer ativar.
 const EMISSOR = "Central BI - Pedreira Sargon";
 
 exports.handler = async (event) => {
@@ -13,8 +14,29 @@ exports.handler = async (event) => {
         return { statusCode: 405, body: "Método não permitido" };
     }
 
-    const { supabase, erro, usuarioAdmin } = await exigirAdmin(event);
-    if (erro) return erro;
+    const token = lerCookie(event.headers);
+    if (!token) {
+        return { statusCode: 401, body: JSON.stringify({ erro: "Não autenticado" }) };
+    }
+
+    let sessao;
+    try {
+        sessao = jwt.verify(token, process.env.JWT_SECRET);
+    } catch {
+        return { statusCode: 401, body: JSON.stringify({ erro: "Sessão inválida" }) };
+    }
+
+    const supabase = getSupabase();
+
+    const { data: usuarioAtual, error: erroUsuario } = await supabase
+        .from("usuarios")
+        .select("id, usuario, ativo, sessao_versao")
+        .eq("id", sessao.sub)
+        .maybeSingle();
+
+    if (erroUsuario || !usuarioAtual || !usuarioAtual.ativo || usuarioAtual.sessao_versao !== sessao.sessaoVersao) {
+        return { statusCode: 401, body: JSON.stringify({ erro: "Sessão encerrada" }) };
+    }
 
     let acao, codigo, senhaAtual;
     try {
@@ -30,13 +52,13 @@ exports.handler = async (event) => {
         const { error: erroUpdate } = await supabase
             .from("usuarios")
             .update({ totp_secret: segredo, totp_ativo: false })
-            .eq("id", usuarioAdmin.id);
+            .eq("id", usuarioAtual.id);
 
         if (erroUpdate) {
             return { statusCode: 500, body: JSON.stringify({ erro: "Não foi possível iniciar a configuração." }) };
         }
 
-        const otpauthUrl = authenticator.keyuri(usuarioAdmin.usuario, EMISSOR, segredo);
+        const otpauthUrl = authenticator.keyuri(usuarioAtual.usuario, EMISSOR, segredo);
         const qrCodeDataUrl = await QRCode.toDataURL(otpauthUrl, { margin: 1, width: 220 });
 
         return {
@@ -51,7 +73,7 @@ exports.handler = async (event) => {
         const { data: usuario, error: erroBusca } = await supabase
             .from("usuarios")
             .select("totp_secret")
-            .eq("id", usuarioAdmin.id)
+            .eq("id", usuarioAtual.id)
             .maybeSingle();
 
         if (erroBusca || !usuario || !usuario.totp_secret) {
@@ -67,7 +89,7 @@ exports.handler = async (event) => {
         const { error: erroUpdate } = await supabase
             .from("usuarios")
             .update({ totp_ativo: true })
-            .eq("id", usuarioAdmin.id);
+            .eq("id", usuarioAtual.id);
 
         if (erroUpdate) {
             return { statusCode: 500, body: JSON.stringify({ erro: "Não foi possível ativar a verificação em duas etapas." }) };
@@ -82,7 +104,7 @@ exports.handler = async (event) => {
         const { data: usuario, error: erroBusca } = await supabase
             .from("usuarios")
             .select("senha_hash")
-            .eq("id", usuarioAdmin.id)
+            .eq("id", usuarioAtual.id)
             .maybeSingle();
 
         if (erroBusca || !usuario) {
@@ -97,7 +119,7 @@ exports.handler = async (event) => {
         const { error: erroUpdate } = await supabase
             .from("usuarios")
             .update({ totp_ativo: false, totp_secret: null })
-            .eq("id", usuarioAdmin.id);
+            .eq("id", usuarioAtual.id);
 
         if (erroUpdate) {
             return { statusCode: 500, body: JSON.stringify({ erro: "Não foi possível desativar." }) };

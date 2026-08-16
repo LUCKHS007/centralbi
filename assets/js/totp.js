@@ -1,8 +1,7 @@
 /* ==========================================================
-   Verificação em duas etapas (TOTP) — só admin.net configura
+   Verificação em duas etapas (TOTP) — opcional, qualquer usuário
+   pode ativar pra própria conta
 ========================================================== */
-
-const LOGIN_ADMIN_UNICO_2FA = "admin.net";
 
 const secao2fa = document.getElementById("secao2fa");
 const statusInativo2fa = document.getElementById("statusInativo2fa");
@@ -168,7 +167,7 @@ document.getElementById("botaoCopiarChave2fa").addEventListener("click", copiarC
 
 window.__sessaoCentralBI.then((sessao) => {
 
-    if (!sessao || sessao.usuario !== LOGIN_ADMIN_UNICO_2FA) return;
+    if (!sessao) return;
 
     secao2fa.hidden = false;
     atualizarEstado2fa(Boolean(sessao.totpAtivo));
