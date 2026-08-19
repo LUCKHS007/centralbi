@@ -84,7 +84,10 @@ insert into dashboards (id, titulo, categoria, descricao, icone, link, permissao
 insert into links_externos (id, titulo, descricao, icone, url, permissao) values
 ('gtfrota', 'GtFrota', 'Relatório de abastecimento (GTFROTA)', 'fa-gas-pump', 'http://10.15.200.220/GTFROTA/Security/Login', null),
 ('fluig', 'Fluig', 'Abrir chamado com a TI ou lançar atestado (Fluig)', 'fa-headset', 'http://fluig.admceos.com.br:46969/portal/p/CEOS/home', null),
-('miro', 'Miro', 'Quadro colaborativo', 'fa-diagram-project', 'https://miro.com/welcomeonboard/ZG8yUFk2Q2c2TWFUWUt2WWpHTHpKNWVNOUZsQlh0UHZSVXhZZFcrQnZDVGdmakhvem1SMG1ES3VRb3oyTHVxdklpeFRUemlwc0hzMSs1cTNNK3Z4MVBZVDFFWWtOVk1KZ21HNTJQWUFkMkFNK3k1a0dMRURiVTRIcUdRVEJyd3lhWWluRVAxeXRuUUgwWDl3Mk1qRGVRPT0hdjE=?share_link_id=781713221351', null);
+('miro', 'Miro', 'Quadro colaborativo', 'fa-diagram-project', 'https://miro.com/welcomeonboard/ZG8yUFk2Q2c2TWFUWUt2WWpHTHpKNWVNOUZsQlh0UHZSVXhZZFcrQnZDVGdmakhvem1SMG1ES3VRb3oyTHVxdklpeFRUemlwc0hzMSs1cTNNK3Z4MVBZVDFFWWtOVk1KZ21HNTJQWUFkMkFNK3k1a0dMRURiVTRIcUdRVEJyd3lhWWluRVAxeXRuUUgwWDl3Mk1qRGVRPT0hdjE=?share_link_id=781713221351', null),
+('carregamento', 'Carregamento', 'Relatório de carregamento da expedição em tempo real', 'fa-truck-ramp-box', 'http://10.15.200.220:46999/carregamento/login.php', null),
+('solicitacao-compra', 'Solicitação de Compra', 'Documento Forms para solicitar revisão do maquinário', 'fa-cart-shopping', 'https://docs.google.com/forms/d/e/1FAIpQLSdUbTo3ELYv7Vl7JbHJGj_5mkhPMXqccBc636ZhGU2eLxajRw/viewform?pli=1', null),
+('grafana', 'Grafana', 'Acompanhamento da produção automatizada em tempo real', 'fa-chart-line', 'https://dados.per.tec.br/login', null);
 
 -- ============================================================
 -- Seed: permissões por cargo (de permissoes.js)
@@ -106,6 +109,8 @@ insert into permissoes_cargo (cargo, permissao) values
 ('Encarregado_Setor', 'Oficina'),
 ('Encarregado_Setor', 'Manutenção'),
 ('Encarregado_Setor', 'gtfrota'),
+('Encarregado_Setor', 'carregamento'),
+('Encarregado_Setor', 'grafana'),
 ('Mecânico', 'Oficina'),
 ('Mecânico', 'Manutenção'),
 ('Operador', 'Produção'),
