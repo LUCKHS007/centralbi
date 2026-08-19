@@ -457,6 +457,18 @@ main{
 
 }
 
+.card-bi .icone-marca{
+
+    width:48px;
+
+    height:48px;
+
+    color:#0057b8;
+
+    margin-bottom:25px;
+
+}
+
 .card-bi h3{
 
     font-size:22px;
@@ -935,6 +947,16 @@ footer{
     padding:18px 30px;
 
     min-height:auto;
+
+}
+
+.painelBI.visualizacao-lista .card-bi .icone-marca{
+
+    width:26px;
+
+    height:26px;
+
+    margin-bottom:10px;
 
 }
 

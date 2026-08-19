@@ -87,7 +87,7 @@ insert into links_externos (id, titulo, descricao, icone, url, permissao) values
 ('miro', 'Miro', 'Quadro colaborativo', 'fa-diagram-project', 'https://miro.com/welcomeonboard/ZG8yUFk2Q2c2TWFUWUt2WWpHTHpKNWVNOUZsQlh0UHZSVXhZZFcrQnZDVGdmakhvem1SMG1ES3VRb3oyTHVxdklpeFRUemlwc0hzMSs1cTNNK3Z4MVBZVDFFWWtOVk1KZ21HNTJQWUFkMkFNK3k1a0dMRURiVTRIcUdRVEJyd3lhWWluRVAxeXRuUUgwWDl3Mk1qRGVRPT0hdjE=?share_link_id=781713221351', null),
 ('carregamento', 'Carregamento', 'Relatório de carregamento da expedição em tempo real', 'fa-truck-ramp-box', 'http://10.15.200.220:46999/carregamento/login.php', null),
 ('solicitacao-compra', 'Solicitação de Compra', 'Documento Forms para solicitar revisão do maquinário', 'fa-cart-shopping', 'https://docs.google.com/forms/d/e/1FAIpQLSdUbTo3ELYv7Vl7JbHJGj_5mkhPMXqccBc636ZhGU2eLxajRw/viewform?pli=1', null),
-('grafana', 'Grafana', 'Acompanhamento da produção automatizada em tempo real', 'fa-chart-line', 'https://dados.per.tec.br/login', null);
+('grafana', 'Grafana', 'Acompanhamento da produção automatizada em tempo real', 'logo:grafana', 'https://dados.per.tec.br/login', null);
 
 -- ============================================================
 -- Seed: permissões por cargo (de permissoes.js)

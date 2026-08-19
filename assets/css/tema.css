@@ -942,7 +942,8 @@ html:not([data-tema="claro"]) .carregando i{
 
 }
 
-html:not([data-tema="claro"]) .card-bi i{
+html:not([data-tema="claro"]) .card-bi i,
+html:not([data-tema="claro"]) .card-bi .icone-marca{
 
     color:var(--tema-acento-texto);
 
