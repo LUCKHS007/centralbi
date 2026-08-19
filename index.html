@@ -746,7 +746,22 @@ function irParaAcessoRapido(){
         document.getElementById("tituloAcessoRapido") ||
         document.getElementById("painelLinks");
 
-    if (alvo) alvo.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (!alvo) return;
+
+    // scrollIntoView sozinho deixa o título embaixo do cabeçalho sticky
+    // (ele fica sobreposto); por isso calculamos a altura real do
+    // cabeçalho em vez de descontar um valor fixo, que quebraria se o
+    // cabeçalho mudasse de tamanho depois.
+    const cabecalho = document.querySelector(".topo");
+    const alturaCabecalho = cabecalho ? cabecalho.getBoundingClientRect().height : 0;
+    const margemExtra = 16;
+
+    const posicaoAlvo = alvo.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+        top: posicaoAlvo - alturaCabecalho - margemExtra,
+        behavior: "smooth",
+    });
 
 }
 
