@@ -11,6 +11,13 @@
 
 html{
     scroll-behavior:smooth;
+
+    /* O site controla o tema escuro sozinho (data-tema="escuro" com
+       cores próprias) — sem isso, navegador/SO no modo escuro tentam
+       "ajudar" trocando a cor do texto de campos/controles nativos pra
+       branco, mas o fundo continua claro (definido no nosso CSS),
+       deixando texto invisível (ex: campos de login). */
+    color-scheme:light;
 }
 
 body{
